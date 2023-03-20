@@ -1,0 +1,9 @@
+:root {
+  --accent_color: #F65261;
+  --grey: #555555;
+  --white: #fff;
+
+  --border_radius: 4px;
+
+  --transition_duration: 0.3s;
+}

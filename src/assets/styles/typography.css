@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+.hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 49px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 0;
+  margin-bottom: 32px;
+}
