@@ -1,16 +1,16 @@
-.genres-filters {
+.genresFilters {
   display: flex;
   gap: 30px;
 }
 
-.genres-filters-item {
+.genresFiltersItem {
   position: relative;
   display: flex;
   align-items: center;
    height: 62px;
 }
 
-.genres-filters-item:after {
+.genresFiltersItem:after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -22,11 +22,11 @@
   transition: opacity var(--transition_duration);
 }
 
-.genres-filters-item-active:after {
+.genresFiltersItemActive:after {
   opacity: 1;
 }
 
-.genres-filters-btn {
+.genresFiltersBtn {
   font-family: 'Montserrat';
   font-weight: 500;
   font-size: 16px;

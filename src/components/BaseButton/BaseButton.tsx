@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
-import styles from './styles.module.css';
 import clsx from 'clsx';
+import { ReactNode } from 'react';
+import styles from './styles.module.css';
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -14,16 +14,9 @@ const BaseButton = ({
   classNames,
   onClick,
   ...props
-}: ButtonProps) => {
-  return (
-    <button
-      onClick={onClick}
-      className={clsx(styles.btn, classNames)}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
-
+}: ButtonProps) => (
+  <button onClick={onClick} className={clsx(styles.btn, classNames)} {...props}>
+    {children}
+  </button>
+);
 export default BaseButton;

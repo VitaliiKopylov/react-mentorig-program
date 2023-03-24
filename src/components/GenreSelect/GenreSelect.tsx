@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import styles from './styles.module.css';
 import clsx from 'clsx';
+import { useState } from 'react';
+import styles from './styles.module.css';
 
 const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
 
@@ -12,18 +12,18 @@ const GenreSelect = () => {
   };
 
   return (
-    <div className={styles['genres-filters']}>
+    <div className={styles.genresFilters}>
       {genres.map((genre) => {
         return (
           <div
             key={genre}
             className={clsx(
-              styles['genres-filters-item'],
-              activeGenre === genre && styles['genres-filters-item-active'],
+              styles.genresFiltersItem,
+              activeGenre === genre && styles.genresFiltersItemActive,
             )}
           >
             <button
-              className={styles['genres-filters-btn']}
+              className={styles.genresFiltersBtn}
               onClick={(event) => onSelect(genre)}
             >
               {genre}

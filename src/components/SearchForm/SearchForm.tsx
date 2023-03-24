@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import BaseButton from '../BaseButton/BaseButton';
 import BaseInput from '../BaseInput/BaseInput';
 import styles from './styles.module.css';
-import { useState } from 'react';
 
 type SearchProps = {
   initialValue: string
@@ -25,7 +25,7 @@ const SearchForm = ({ initialValue }: SearchProps) => {
       />
       <BaseButton
         type="submit"
-        classNames={'button--search'}
+        classNames='button--search'
         disabled={term.length === 0}
       >
         Search

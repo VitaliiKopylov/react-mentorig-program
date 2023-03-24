@@ -8,20 +8,24 @@ type InputProps = {
   onChange: (str: string) => void;
 };
 
-const BaseInput = ({ labelText, id, onChange, placeholder, value }: InputProps) => {
-  return (
-    <>
-      {labelText && <label htmlFor={id}>{labelText}</label>}
-      <input
-        type="text"
-        id={id}
-        placeholder={placeholder}
-        className={styles.input}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
-    </>
-  );
-};
+const BaseInput = ({
+  labelText,
+  id,
+  onChange,
+  placeholder,
+  value,
+}: InputProps) => (
+  <>
+    {labelText && <label htmlFor={id}>{labelText}</label>}
+    <input
+      type="text"
+      id={id}
+      placeholder={placeholder}
+      className={styles.input}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    />
+  </>
+);
 
 export default BaseInput;

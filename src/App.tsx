@@ -1,10 +1,9 @@
-import React from 'react';
-import './assets/styles/vars.css';
-import './assets/styles/typography.css';
-
 import Counter from './components/Counter/Counter';
 import SearchForm from './components/SearchForm/SearchForm';
 import GenreSelect from './components/GenreSelect/GenreSelect';
+
+import './assets/styles/vars.css';
+import './assets/styles/typography.css';
 
 function App() {
   return (
