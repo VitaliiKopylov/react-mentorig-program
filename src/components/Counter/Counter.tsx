@@ -1,8 +1,8 @@
 import { Component, createElement } from 'react';
 import styles from './styles.module.css';
 
-type CounterProps = { 
-  initialValue: number 
+type CounterProps = {
+  initialValue: number;
 };
 
 export default class Counter extends Component<CounterProps, {}> {
@@ -27,7 +27,11 @@ export default class Counter extends Component<CounterProps, {}> {
         { className: styles.button, onClick: this.decreaseCounter },
         '-',
       ),
-      createElement('div', { className: styles.result }, this.state.counter),
+      createElement(
+        'div',
+        { className: styles.result, 'data-testid': 'number-display' },
+        this.state.counter,
+      ),
       createElement(
         'button',
         { className: styles.button, onClick: this.increaseCounter },
