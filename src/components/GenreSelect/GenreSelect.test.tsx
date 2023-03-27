@@ -3,12 +3,12 @@ import GenreSelect from './GenreSelect';
 
 const setup = (activeGenre?: string) => {
   const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
-  const onSelect = jest.fn();
+  const onSelectMock = jest.fn();
   const utils = render(
-    <GenreSelect genres={genres} onSelect={onSelect} activeGenre={activeGenre || genres[0]} />,
+    <GenreSelect genres={genres} onSelect={onSelectMock} activeGenre={activeGenre || genres[0]} />,
   );
   return {
-    onSelect,
+    onSelectMock,
     genres,
     ...utils,
   };
@@ -32,13 +32,13 @@ describe('GenreSelect Component', () => {
   });
 
   it('calls "onSelect" callback with correct genre after a click event on a genre button', () => {
-    const { onSelect } = setup();
+    const { onSelectMock } = setup();
     const selectedGenre = 'Documentary';
 
     const genreButton = screen.getByText(selectedGenre);
     fireEvent.click(genreButton);
 
-    expect(onSelect).toHaveBeenCalledTimes(1);
-    expect(onSelect).toHaveBeenCalledWith(selectedGenre);
+    expect(onSelectMock).toHaveBeenCalledTimes(1);
+    expect(onSelectMock).toHaveBeenCalledWith(selectedGenre);
   });
 });
