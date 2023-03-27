@@ -1,38 +1,42 @@
-import clsx from 'clsx';
-import { useState } from 'react';
-import styles from './styles.module.css';
+  import clsx from 'clsx';
+  import styles from './styles.module.css';
 
-const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
+  interface GenreSelectProps {
+    genres: string[];
+    activeGenre: string;
+    onSelect: (genre: string) => void;
+  }
 
-const GenreSelect = () => {
-  const [activeGenre, setActiveGenre] = useState(genres[0]);
+  const GenreSelect = ({ genres, activeGenre, onSelect }: GenreSelectProps) => {
+    
+    const onSelectHandler = (genre: string) => {
+      onSelect(genre);
+    };
 
-  const onSelect = (genre: string) => {
-    setActiveGenre(genre);
+    return (
+      <div className={styles.genresFilters}>
+        {genres.map((genre) => {
+          return (
+            <div
+              key={genre}
+              className={clsx(
+                styles.genresFiltersItem,
+                activeGenre === genre && styles.genresFiltersItemActive,
+              )}
+              data-cy={`${genre}-genre-select-wrapper`}
+            >
+              <button
+                className={styles.genresFiltersBtn}
+                onClick={(event) => onSelectHandler(genre)}
+                data-cy={`${genre}-genre-select`}
+              >
+                {genre}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    );
   };
 
-  return (
-    <div className={styles.genresFilters}>
-      {genres.map((genre) => {
-        return (
-          <div
-            key={genre}
-            className={clsx(
-              styles.genresFiltersItem,
-              activeGenre === genre && styles.genresFiltersItemActive,
-            )}
-          >
-            <button
-              className={styles.genresFiltersBtn}
-              onClick={(event) => onSelect(genre)}
-            >
-              {genre}
-            </button>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
-export default GenreSelect;
+  export default GenreSelect;

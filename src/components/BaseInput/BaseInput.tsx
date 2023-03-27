@@ -14,6 +14,7 @@ const BaseInput = ({
   onChange,
   placeholder,
   value,
+  ...props
 }: InputProps) => (
   <>
     {labelText && <label htmlFor={id}>{labelText}</label>}
@@ -24,6 +25,7 @@ const BaseInput = ({
       className={styles.input}
       value={value}
       onChange={(e) => onChange(e.target.value)}
+      {...props}
     />
   </>
 );

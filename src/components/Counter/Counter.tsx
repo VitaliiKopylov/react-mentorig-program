@@ -24,7 +24,7 @@ export default class Counter extends Component<CounterProps, {}> {
       { className: styles.container },
       createElement(
         'button',
-        { className: styles.button, onClick: this.decreaseCounter },
+        { className: styles.button,  'data-testid': 'number-decrement', onClick: this.decreaseCounter },
         '-',
       ),
       createElement(
@@ -34,7 +34,7 @@ export default class Counter extends Component<CounterProps, {}> {
       ),
       createElement(
         'button',
-        { className: styles.button, onClick: this.increaseCounter },
+        { className: styles.button,  'data-testid': 'number-increment', onClick: this.increaseCounter },
         '+',
       ),
     );
