@@ -1,11 +1,12 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import GenreSelect from './GenreSelect';
+import { Genres } from '../../types';
 
-const setup = (activeGenre?: string) => {
-  const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
+const setup = (activeGenre?: Genres) => {
+  const genres = Object.values(Genres);
   const onSelectMock = jest.fn();
   const utils = render(
-    <GenreSelect genres={genres} onSelect={onSelectMock} activeGenre={activeGenre || genres[0]} />,
+    <GenreSelect genres={genres} onSelect={onSelectMock} activeGenre={activeGenre || Genres.All} />,
   );
   return {
     onSelectMock,
@@ -24,7 +25,7 @@ describe('GenreSelect Component', () => {
   });
 
   it('highlights a selected genre passed in props', () => {
-    const activeGenre = 'Comedy';
+    const activeGenre = Genres.Comedy;
     setup(activeGenre);
 
     const activeGenreWrapper = screen.getByText(activeGenre).closest('div');

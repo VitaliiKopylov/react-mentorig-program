@@ -3,12 +3,14 @@ import Counter from './components/Counter/Counter';
 import SearchForm from './components/SearchForm/SearchForm';
 import GenreSelect from './components/GenreSelect/GenreSelect';
 
+import { Genres } from './types';
+
 import './assets/styles/vars.css';
 import './assets/styles/typography.css';
 
 function App() {
-  const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
-  const [activeGenre, setActiveGenre] = useState(genres[0]);
+  const genres = Object.values(Genres);
+  const [activeGenre, setActiveGenre] = useState(Genres.All);
 
   return (
     <div className='App'>
