@@ -1,36 +1,38 @@
 import clsx from 'clsx';
-import { useState } from 'react';
 import styles from './styles.module.css';
+import { Genres } from '../../types';
 
-const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
+interface GenreSelectProps {
+  genres: Genres[];
+  activeGenre: Genres;
+  onSelect: (genre: Genres) => void;
+}
 
-const GenreSelect = () => {
-  const [activeGenre, setActiveGenre] = useState(genres[0]);
-
-  const onSelect = (genre: string) => {
-    setActiveGenre(genre);
+const GenreSelect = ({ genres, activeGenre, onSelect }: GenreSelectProps) => {
+  const onSelectHandler = (genre: Genres) => {
+    onSelect(genre);
   };
 
   return (
     <div className={styles.genresFilters}>
-      {genres.map((genre) => {
-        return (
-          <div
-            key={genre}
-            className={clsx(
-              styles.genresFiltersItem,
-              activeGenre === genre && styles.genresFiltersItemActive,
-            )}
+      {genres.map((genre) => (
+        <div
+          key={genre}
+          className={clsx(
+            styles.genresFiltersItem,
+            activeGenre === genre && styles.genresFiltersItemActive,
+          )}
+          data-cy={`${genre}-genre-select-wrapper`}
+        >
+          <button
+            className={styles.genresFiltersBtn}
+            onClick={(event) => onSelectHandler(genre)}
+            data-cy={`${genre}-genre-select`}
           >
-            <button
-              className={styles.genresFiltersBtn}
-              onClick={(event) => onSelect(genre)}
-            >
-              {genre}
-            </button>
-          </div>
-        );
-      })}
+            {genre}
+          </button>
+        </div>
+      ))}
     </div>
   );
 };
