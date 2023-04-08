@@ -8,7 +8,7 @@ type SearchProps = {
   onSearch:  (str: string) => void;
 };
 
-const SearchForm = ({ initialValue, onSearch }: SearchProps) => {
+const SearchForm = ({ initialValue = 'Search...', onSearch }: SearchProps) => {
   const [term, setTerm] = useState(initialValue);
 
   const onSubmit = (e: React.SyntheticEvent) => {
@@ -22,7 +22,7 @@ const SearchForm = ({ initialValue, onSearch }: SearchProps) => {
         id="search"
         placeholder="What do you want to watch?"
         value={term}
-        onChange={setTerm}
+        onChangeHandler={setTerm}
         data-testid="search-input"
       />
       <BaseButton

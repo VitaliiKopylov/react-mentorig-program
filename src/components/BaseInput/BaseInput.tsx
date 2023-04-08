@@ -1,33 +1,39 @@
+import type { InputHTMLAttributes } from 'react';
 import styles from './styles.module.css';
 
-type InputProps = {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   labelText?: string;
   placeholder?: string;
   value?: string;
-  onChange: (str: string) => void;
+  // onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeHandler: (str: string) => void;
 };
 
 const BaseInput = ({
   labelText,
   id,
-  onChange,
+  onChangeHandler,
   placeholder,
   value,
   ...props
 }: InputProps) => (
-  <>
-    {labelText && <label htmlFor={id}>{labelText}</label>}
+  <div>
+    {labelText && (
+      <label htmlFor={id} className="form-label">
+        {labelText}
+      </label>
+    )}
     <input
-      type="text"
+      type={props.type || 'text'}
       id={id}
       placeholder={placeholder}
       className={styles.input}
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => onChangeHandler(e.target.value)}
       {...props}
     />
-  </>
+  </div>
 );
 
 export default BaseInput;

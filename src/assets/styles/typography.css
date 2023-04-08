@@ -11,3 +11,21 @@
   margin: 0;
   margin-bottom: 32px;
 }
+
+.form-label {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+
+  letter-spacing: 0.888889px;
+  text-transform: uppercase;
+
+  color: #f65261;
+
+  mix-blend-mode: normal;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
