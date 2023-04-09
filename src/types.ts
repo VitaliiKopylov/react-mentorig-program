@@ -12,16 +12,16 @@ export enum SortOptions {
 }
 
 export interface IMovie {
-  imageUrl: string;
+  imageUrl?: string;
   name: string;
-  releaseYear: number;
+  releaseYear: number | string;
   // genres: Exclude<Genres, Genres.All>[];
   // genres: ('Documentary' | 'Comedy' | 'Horror' | 'Crime')[];
-  genres: string[];
+  genres: string[] | Exclude<Genres, Genres.All>[];
 }
 
 export interface IMovieDetails extends IMovie {
-  rating: number;
-  duration: string;
-  description: string;
+  rating?: number | string;
+  duration?: string;
+  description?: string;
 }

@@ -1,7 +1,7 @@
-[  
-  {    
-    "imageUrl": "https://picsum.photos/322/455",    
-    "name": "The Silence of the Lambs",   
+[
+  {
+    "imageUrl": "https://picsum.photos/322/455",
+    "name": "The Silence of the Lambs",
     "releaseYear": 1991,
     "rating": 8.6,
     "duration": "1h 58m",
@@ -18,63 +18,93 @@
     "genres": ["Horror"]
   },
   {
-    "imageUrl": "https://picsum.photos/322/455",
+    "imageUrl": "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/bE8q29QGKxMRKzPGeyCJvoXe20l.jpg",
     "name": "Psycho",
     "releaseYear": 1960,
-    "genres": ["Horror"]
+    "genres": ["Horror"],
+    "rating": 8.5,
+    "duration": "1h 49m",
+    "description": "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run and checks into a remote motel run by a young man under the domination of his mother."
   },
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "The Blair Witch Project",
     "releaseYear": 1999,
-    "genres": ["Horror"]
+    "genres": ["Horror"],
+    "rating": 8.5,
+    "duration": "1h 49m",
+    "description": "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run and checks into a remote motel run by a young man under the domination of his mother."
   },
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "This Is Spinal Tap",
     "releaseYear": 1984,
-    "genres": ["Comedy"]
+    "genres": ["Comedy"],
+    "rating": 8.5,
+    "duration": "1h 49m",
+    "description": "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run and checks into a remote motel run by a young man under the domination of his mother."
   },
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "Airplane!",
     "releaseYear": 1980,
-    "genres": ["Comedy"]
+    "genres": ["Comedy"],
+    "rating": 8.5,
+    "duration": "1h 49m",
+    "description": "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run and checks into a remote motel run by a young man under the domination of his mother."
   },
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "An Inconvenient Truth",
     "releaseYear": 2006,
-    "genres": ["Documentary"]
+    "genres": ["Documentary"],
+    "rating": 8.5,
+    "duration": "1h 49m",
+    "description": "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run and checks into a remote motel run by a young man under the domination of his mother."
   },
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "Bowling for Columbine",
     "releaseYear": 2002,
-    "genres": ["Documentary"]
+    "genres": ["Documentary"],
+    "rating": 8.5,
+    "duration": "1h 49m",
+    "description": "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run and checks into a remote motel run by a young man under the domination of his mother."
   },
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "Fahrenheit 9/11",
     "releaseYear": 2004,
-    "genres": ["Documentary"]
+    "genres": ["Documentary"],
+    "rating": 8.5,
+    "duration": "1h 49m",
+    "description": "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run and checks into a remote motel run by a young man under the domination of his mother."
   },
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "Get Out",
     "releaseYear": 2017,
-    "genres": ["Horror"]
+    "genres": ["Horror"],
+    "rating": 8.5,
+    "duration": "1h 49m",
+    "description": "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run and checks into a remote motel run by a young man under the domination of his mother."
   },
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "The Babadook",
     "releaseYear": 2014,
-    "genres": ["Horror"]
+    "genres": ["Horror"],
+    "rating": 8.5,
+    "duration": "1h 49m",
+    "description": "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run and checks into a remote motel run by a young man under the domination of his mother."
   },
   {
-    "imageUrl": "https://picsum.photos/322/455",
+    "imageUrl": "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kXTdxfgCRGg38Q90WG9iJyTYzqP.jpg",
     "name": "Shaun of the Dead",
     "releaseYear": 2004,
-    "genres": ["Comedy", "Horror"]
+    "genres": ["Comedy", "Horror"],
+    "rating": 8.5,
+    "duration": "1h 39m",
+    "description": "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run and checks into a remote motel run by a young man under the domination of his mother."
   }
 ]

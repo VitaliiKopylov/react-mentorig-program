@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import BaseButton from '../BaseButton/BaseButton';
 import BaseInput from '../BaseInput/BaseInput';
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 
 type SearchProps = {
   initialValue: string,
@@ -18,13 +18,15 @@ const SearchForm = ({ initialValue = 'Search...', onSearch }: SearchProps) => {
 
   return (
     <form className={styles.container} onSubmit={onSubmit}>
-      <BaseInput
-        id="search"
-        placeholder="What do you want to watch?"
-        value={term}
-        onChangeHandler={setTerm}
-        data-testid="search-input"
-      />
+      <div className={styles.input}>
+        <BaseInput
+          id="search"
+          placeholder="What do you want to watch?"
+          value={term}
+          onChangeHandler={setTerm}
+          data-testid="search-input"
+        />
+      </div>
       <BaseButton
         type="submit"
         classNames='button--search'

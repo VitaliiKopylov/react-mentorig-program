@@ -16,6 +16,11 @@
   height: 57px;
   cursor: pointer;
   transition: opacity var(--transition_duration), transform var(--transition_duration);
+  &_outlined {
+    background: transparent;
+    border: 1px solid var(--accent_color);
+    color: var(--accent_color);
+  }
 }
 
 .btn:hover {

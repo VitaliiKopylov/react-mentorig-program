@@ -18,7 +18,7 @@ const setup = () => {
 };
 
 describe('SortControl', () => {
-  test('component renders initial state', () => {
+  it('should render component with correct initial state', () => {
     const { trigger } = setup();
     const dd = screen.queryByTestId('sort-dd');
 
@@ -27,7 +27,7 @@ describe('SortControl', () => {
     expect(dd).not.toBeInTheDocument();
   });
 
-  test('selecting new value works correct', () => {
+  it('should open dropdown on click', () => {
     const { trigger } = setup();
 
     fireEvent.click(trigger);

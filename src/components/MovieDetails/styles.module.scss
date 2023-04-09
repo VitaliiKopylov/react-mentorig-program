@@ -6,6 +6,7 @@
   }
   &__image {
     grid-column: 1 / span 1;
+    max-width: 100%;
   }
   &__info {
     grid-column: 2 / -1;

@@ -42,7 +42,7 @@ const SortControl = ({
           <IconContext.Provider
             value={{
               color: 'var(--accent_color)',
-              className: styles.sort__triangle,
+              className: styles.sort__arrow,
             }}
           >
             <VscTriangleDown />

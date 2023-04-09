@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { TfiClose } from 'react-icons/tfi';
 import { IconContext } from 'react-icons';
 
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 import styles from './styles.module.scss';
 
@@ -34,6 +34,15 @@ const dropIn = {
 };
 
 const BaseModal = ({ children, title, handleClose }: IBaseModalProps) => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      const clean = () => (document.body.style.overflow = 'unset');
+      clean();
+    };
+  }, []);
+
   return (
     <motion.div
       onClick={handleClose}
@@ -56,10 +65,7 @@ const BaseModal = ({ children, title, handleClose }: IBaseModalProps) => {
               color: 'var(--white)',
             }}
           >
-            <button
-              className={styles.modal__closeBtn}
-              onClick={handleClose}
-            >
+            <button className={styles.modal__closeBtn} onClick={handleClose}>
               <TfiClose />
             </button>
           </IconContext.Provider>

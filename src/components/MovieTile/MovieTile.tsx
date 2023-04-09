@@ -10,14 +10,17 @@ import styles from './styles.module.scss';
 interface MovieTileProps {
   movie: IMovie;
   onMovieClick: () => void;
+  onMovieDelete: () => void;
+  onMovieEdit: () => void;
 }
 
-const MovieTile = ({ movie, onMovieClick }: MovieTileProps) => {
+const MovieTile = ({ movie, onMovieClick, onMovieDelete, onMovieEdit }: MovieTileProps) => {
   const { imageUrl, name, releaseYear, genres } = movie;
   const [open, setOpen] = useState(false);
 
   function optionSelected(option: any) {
-    console.log(option);
+    if (option === 'Delete') onMovieDelete();
+    if (option === 'Edit') onMovieEdit();
     setOpen(false);
   }
   // const [showMenu, setShowMenu] = useState(false);

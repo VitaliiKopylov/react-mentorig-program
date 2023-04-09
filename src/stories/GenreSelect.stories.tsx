@@ -18,7 +18,6 @@ export const Default: Story = {
   args: {
     genres,
     onSelect: (genre) => console.log(`Selected genre: ${genre}`),
-    // onSelect: (genre) => setActiveGenre(genre),
   },
 };
 

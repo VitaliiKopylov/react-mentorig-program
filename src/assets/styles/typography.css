@@ -12,7 +12,29 @@
   margin-bottom: 32px;
 }
 
+/* FORM */
+
+.input,
+.textarea {
+  background: rgba(50, 50, 50, 0.8);
+  border-radius: var(--border_radius);
+  border: none;
+  padding: 16px;
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--white);
+  width: 100%;
+}
+
+.input::placeholder,
+.textarea::placeholder  {
+  opacity: 0.7;
+}
+
 .form-label {
+  display: block;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;

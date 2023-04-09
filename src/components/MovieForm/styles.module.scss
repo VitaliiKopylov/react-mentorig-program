@@ -3,4 +3,16 @@
   grid-template-columns: 2fr 1fr;
   gap: 30px;
   width: 860px;
+  &__textarea,
+  &__actions {
+     grid-column: 1 / -1;
+  }
+  &__textarea {
+    margin-bottom: 50px;
+  }
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+  }
 }
