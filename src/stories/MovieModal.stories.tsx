@@ -1,13 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 
 import MovieModal from '../components/modals/MovieModal';
+import BaseButton from '../components/BaseButton/BaseButton';
+import styles from '../components/MovieForm/styles.module.scss';
 
 const meta: Meta<typeof MovieModal> = {
   title: 'Components/Modals/MovieModal',
   component: MovieModal,
   decorators: [
     (Story) => (
-      <div style={{ margin: 'auto', maxWidth: '960px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 'calc(100vh - 40px)' }}>
         <Story />
       </div>
     ),
@@ -18,6 +21,22 @@ const meta: Meta<typeof MovieModal> = {
 export default meta;
 
 type Story = StoryObj<typeof MovieModal>;
+
+const ModalExample = (formData: any) => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  return (
+    <div>
+      <BaseButton onClick={() => setModalOpen(true)}>Open Modal</BaseButton>
+      {modalOpen && (
+        <MovieModal
+          handleClose={() => setModalOpen(false)}
+          formData={formData}
+        />
+      )}
+    </div>
+  );
+};
 
 export const Default: Story = {
   args: {
@@ -32,4 +51,5 @@ export const Default: Story = {
       genres: ['Crime', 'Drama'],
     },
   },
+  render: ({ formData }) => <ModalExample formData={formData} />,
 };

@@ -86,7 +86,7 @@ function App() {
           />
           <SortControl />
         </div>
-        <div className="app__results">39 movies found</div>
+        <div className="app__results">{movies.length} movies found</div>
         <div className="app__cards">
           {movies.map((movie) => (
             <MovieTile

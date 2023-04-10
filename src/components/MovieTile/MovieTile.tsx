@@ -23,22 +23,6 @@ const MovieTile = ({ movie, onMovieClick, onMovieDelete, onMovieEdit }: MovieTil
     if (option === 'Edit') onMovieEdit();
     setOpen(false);
   }
-  // const [showMenu, setShowMenu] = useState(false);
-
-  // const handleContextMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   event.preventDefault();
-  //   setShowMenu(true);
-  // };
-
-  // const handleEditClick = () => {
-  //   // TODO: handle edit click
-  //   setShowMenu(false);
-  // };
-
-  // const handleDeleteClick = () => {
-  //   // TODO: handle delete click
-  //   setShowMenu(false);
-  // };
 
   return (
     <div className={styles.movieTile} onMouseLeave={() => setOpen(false)}>

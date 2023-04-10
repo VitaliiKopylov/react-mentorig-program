@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+
 import BaseInput from '../BaseInput/BaseInput';
 import BaseSelect from '../BaseSelect/BaseSelect';
 import BaseTextarea from '../BaseTextarea/BaseTextarea';
-import { IMovieDetails, Genres } from '../../types';
-
-import styles from './styles.module.scss';
 import BaseButton from '../BaseButton/BaseButton';
+import { IMovieDetails, Genres } from '../../types';
+import styles from './styles.module.scss';
+
 const genresOptions = Object.values(Genres)
   .filter((genre) => genre !== 'All')
   .map((genre) => ({
@@ -30,12 +31,12 @@ const MovieForm = ({ initialFormData }: IMovieFormProps) => {
 
   useEffect(() => {
     if (initialFormData) {
+      console.log('FORM DATA::::', initialFormData)
       setFormData({ ...initialFormData });
     }
   }, []);
 
   const handleInput = (name: string, value: string | string[]) => {
-    console.log(value);
     setFormData({
       ...formData,
       [name]: value,
@@ -71,6 +72,7 @@ const MovieForm = ({ initialFormData }: IMovieFormProps) => {
       />
       <BaseSelect
         labelText="Genre"
+        id="genre"
         selected={formData.genres}
         options={genresOptions}
         onChange={(selected) => handleInput('genres', selected)}

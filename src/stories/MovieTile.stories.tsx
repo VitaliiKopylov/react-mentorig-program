@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import MovieTile from '../components/MovieTile/MovieTile';
-import styles from '../components/MovieTile/styles.module.css';
+import styles from '../components/MovieTile/styles.module.scss';
 
 const meta: Meta<typeof MovieTile> = {
   title: 'Components/MovieTile',

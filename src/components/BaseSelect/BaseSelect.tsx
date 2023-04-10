@@ -2,7 +2,7 @@ import { VscTriangleDown } from 'react-icons/vsc';
 import { IconContext } from 'react-icons';
 import clsx from 'clsx';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './styles.module.scss';
 
@@ -13,6 +13,7 @@ interface IOption {
 
 interface IBaseSelectProps {
   labelText?: string;
+  id: string;
   options: IOption[];
   onChange: (selected: string[]) => void;
   selected: string[];
@@ -21,8 +22,9 @@ interface IBaseSelectProps {
 const BaseSelect = ({
   labelText,
   options,
+  id,
   onChange,
-  selected,
+  selected = [],
 }: IBaseSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -31,31 +33,35 @@ const BaseSelect = ({
   };
 
   const handleSelect = (option: IOption) => {
-    
     const index = selected.indexOf(option.value);
     let newValue = [...selected];
-    
 
     if (index === -1) {
       newValue.push(option.value);
     } else {
       newValue.splice(index, 1);
     }
-    console.log(option, index, newValue);
     onChange(newValue);
   };
 
   return (
     <div className={styles.bSelect}>
       {labelText && <div className="form-label">{labelText}</div>}
-      <div className={styles.bSelect__header} onClick={handleToggle}>
-        <div className={styles.bSelect__selected}>
+      <div
+        className={styles.bSelect__header}
+        onClick={handleToggle}
+        tabIndex={0}
+      >
+        <div className={styles.bSelect__selected} id={id}>
           {selected.length === 0 ? 'Select Genre' : selected.join(', ')}
         </div>
         <IconContext.Provider
           value={{
             color: 'var(--accent_color)',
-            className: clsx(styles.bSelect__arrow, isOpen && styles.bSelect__arrowRotated)
+            className: clsx(
+              styles.bSelect__arrow,
+              isOpen && styles.bSelect__arrowRotated,
+            ),
           }}
         >
           <VscTriangleDown />

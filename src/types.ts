@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export enum Genres {
   All = 'All',
   Documentary = 'Documentary',

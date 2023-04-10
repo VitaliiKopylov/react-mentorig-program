@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import { IMovieDetails } from '../../types';
 import MovieDetails from './MovieDetails';
 
-const testMovie: IMovieDetails = {
+const movieMock: IMovieDetails = {
   imageUrl: 'http://example.com/image.png',
   name: 'Test Movie',
   releaseYear: 2022,
@@ -14,28 +14,28 @@ const testMovie: IMovieDetails = {
 
 describe('MovieDetails', () => {
   it('renders movie details correctly', () => {
-    const { getByRole, getByText } = render(<MovieDetails movie={testMovie} />);
+    const { getByRole, getByText } = render(<MovieDetails movie={movieMock} />);
 
-    expect(getByRole('img')).toHaveAttribute('src', testMovie.imageUrl);
-    expect(getByRole('img')).toHaveAttribute('alt', testMovie.name);
-    expect(getByText(testMovie.name)).toBeInTheDocument();
-    expect(getByText(testMovie.genres.join(', '))).toBeInTheDocument();
-    expect(getByText(testMovie.releaseYear.toString())).toBeInTheDocument();
-    expect(getByText(testMovie.duration!)).toBeInTheDocument();
-    expect(getByText(testMovie.description!)).toBeInTheDocument();
+    expect(getByRole('img')).toHaveAttribute('src', movieMock.imageUrl);
+    expect(getByRole('img')).toHaveAttribute('alt', movieMock.name);
+    expect(getByText(movieMock.name)).toBeInTheDocument();
+    expect(getByText(movieMock.genres.join(', '))).toBeInTheDocument();
+    expect(getByText(movieMock.releaseYear.toString())).toBeInTheDocument();
+    expect(getByText(movieMock.duration!)).toBeInTheDocument();
+    expect(getByText(movieMock.description!)).toBeInTheDocument();
   });
 
   it('renders rating when it is present', () => {
-    const { getByText } = render(<MovieDetails movie={testMovie} />);
+    const { getByText } = render(<MovieDetails movie={movieMock} />);
 
-    expect(getByText(testMovie.rating!.toString())).toBeInTheDocument();
+    expect(getByText(movieMock.rating!.toString())).toBeInTheDocument();
   });
 
   it('does not render rating when it is not present', () => {
     const { queryByText } = render(
-      <MovieDetails movie={{ ...testMovie, rating: undefined }} />
+      <MovieDetails movie={{ ...movieMock, rating: undefined }} />
     );
 
-    expect(queryByText(testMovie.rating!.toString())).toBeNull();
+    expect(queryByText(movieMock.rating!.toString())).toBeNull();
   });
 });
