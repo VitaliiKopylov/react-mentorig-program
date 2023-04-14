@@ -1,0 +1,16 @@
+.deleteModal {
+  &__descr {
+    margin-bottom: 24px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+
+    color: #ffffff;
+  }
+  &__btn {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

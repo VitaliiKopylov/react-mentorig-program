@@ -1,0 +1,64 @@
+.app {
+  padding-top: 90px;
+  &__header {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    &-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  &__filters {
+    border-bottom: 2px solid #424242;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__results {
+    padding: 24px 0;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: var(--white);
+  }
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px 52px;
+    margin-bottom: 72px;
+  }
+}
+
+.hero {
+  background-image: url('./assets/images/hero.jpg');
+  background-size: cover;
+  padding: 100px 0 150px;
+  margin-bottom: 20px;
+  &__inner {
+    max-width: 990px;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+}
+
+.add-btn {
+  background: rgba(96, 96, 96, 0.68);
+  border-radius: 4px;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: right;
+  text-transform: uppercase;
+  border: none;
+  color: #f65261;
+  padding: 0 18px;
+  height: 46px;
+}

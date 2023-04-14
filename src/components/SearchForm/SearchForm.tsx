@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import BaseButton from '../BaseButton/BaseButton';
-import BaseInput from '../BaseInput/BaseInput';
-import styles from './styles.module.css';
+import BaseButton from '../BaseButton';
+import BaseInput from '../BaseInput';
+import styles from './styles.module.scss';
 
 type SearchProps = {
   initialValue: string,
   onSearch:  (str: string) => void;
 };
 
-const SearchForm = ({ initialValue, onSearch }: SearchProps) => {
+const SearchForm = ({ initialValue = 'Search...', onSearch }: SearchProps) => {
   const [term, setTerm] = useState(initialValue);
 
   const onSubmit = (e: React.SyntheticEvent) => {
@@ -18,13 +18,15 @@ const SearchForm = ({ initialValue, onSearch }: SearchProps) => {
 
   return (
     <form className={styles.container} onSubmit={onSubmit}>
-      <BaseInput
-        id="search"
-        placeholder="What do you want to watch?"
-        value={term}
-        onChange={setTerm}
-        data-testid="search-input"
-      />
+      <div className={styles.input}>
+        <BaseInput
+          id="search"
+          placeholder="What do you want to watch?"
+          value={term}
+          onChange={setTerm}
+          data-testid="search-input"
+        />
+      </div>
       <BaseButton
         type="submit"
         classNames='button--search'

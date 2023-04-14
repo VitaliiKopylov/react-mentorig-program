@@ -1,0 +1,40 @@
+.sort {
+  display: flex;
+  &__label {
+    margin-right: 30px;
+    font-family: 'Montserrat';
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: 400;
+    opacity: 0.6;
+  }
+  &__select {
+    position: relative;
+  }
+  &__trigger {
+    background: none;
+    border: none;
+    font-weight: 500;
+    font-family: 'Montserrat';
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+  &__arrow {
+    margin-left: 12px;
+    margin-bottom: -2px;
+  }
+  &__dd {
+    position: absolute;
+    z-index: 10;
+    top: -30px;
+    right: -5px;
+    box-shadow: 0px 0px 5px rgba(246, 82, 97, 0.5);
+    border-radius: 4px;
+  }
+}

@@ -1,33 +1,32 @@
-import type { InputHTMLAttributes } from 'react';
-// import styles from './styles.module.css';
+import type { TextareaHTMLAttributes } from 'react';
 
-type InputProps = {
+
+type IBaseTextareaProps = {
   onChange: (val: string) => void;
   id: string;
   labelText?: string;
   placeholder?: string;
   value?: string;
-} & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
+} & Omit <TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'>;
 
-const BaseInput = ({
+const BaseTextarea = ({
   labelText,
   id,
   onChange,
   placeholder,
   value,
   ...props
-}: InputProps) => (
+}: IBaseTextareaProps) => (
   <div>
     {labelText && (
       <label htmlFor={id} className="form-label">
         {labelText}
       </label>
     )}
-    <input
-      type={props.type || 'text'}
+    <textarea
       id={id}
       placeholder={placeholder}
-      className="input"
+      className="textarea"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       {...props}
@@ -35,4 +34,4 @@ const BaseInput = ({
   </div>
 );
 
-export default BaseInput;
+export default BaseTextarea;
