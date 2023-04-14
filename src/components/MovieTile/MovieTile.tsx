@@ -2,7 +2,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { IconContext } from "react-icons";
 
 import { useState } from 'react';
-import BaseDropdown from '../BaseDropdown/BaseDropdown';
+import BaseDropdown from '../BaseDropdown';
 
 import { IMovie } from '../../types';
 import styles from './styles.module.scss';
@@ -18,7 +18,7 @@ const MovieTile = ({ movie, onMovieClick, onMovieDelete, onMovieEdit }: MovieTil
   const { imageUrl, name, releaseYear, genres } = movie;
   const [open, setOpen] = useState(false);
 
-  function optionSelected(option: any) {
+  const optionSelected = (option: any) => {
     if (option === 'Delete') onMovieDelete();
     if (option === 'Edit') onMovieEdit();
     setOpen(false);

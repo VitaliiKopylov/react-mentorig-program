@@ -4,7 +4,7 @@ import { IconContext } from 'react-icons';
 import { useState } from 'react';
 
 import { SortOptions } from '../../types';
-import BaseDropdown from '../BaseDropdown/BaseDropdown';
+import BaseDropdown from '../BaseDropdown';
 
 import styles from './styles.module.scss';
 

@@ -2,24 +2,19 @@ import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
 import SearchForm from './components/SearchForm/SearchForm';
-import GenreSelect from './components/GenreSelect/GenreSelect';
+import GenreSelect from './components/GenreSelect';
 import MovieTile from './components/MovieTile/MovieTile';
-import MovieDetails from './components/MovieDetails/MovieDetails';
+import MovieDetails from './components/MovieDetails';
 import SortControl from './components/SortControl/SortControl';
-import MovieModal from './components/modals/MovieModal';
-import DeleteModal from './components/modals/DeleteModal';
+import { DeleteModal, MovieModal } from './components/modals';
 
 import { Genres, IMovieDetails } from './types';
+import { MOVIE_MODAL, DELETE_MODAL } from './constants';
 import movies from './movies.json';
 import './assets/styles/vars.css';
 import './assets/styles/typography.css';
 import './app.scss';
 import logo from './assets/images/logo.svg';
-
-const modals = {
-  MovieModal,
-  DeleteModal,
-};
 
 function App() {
   // Genres select
@@ -40,11 +35,11 @@ function App() {
   };
   const deleteMovie = (name: string) => {
     const activeMovie = movies.find((movie) => movie.name === name);
-    open('DeleteModal');
+    open(DELETE_MODAL);
   };
   const addMovie = () => {
     setActiveMovie(undefined);
-    open('MovieModal');
+    open(MOVIE_MODAL);
   }
 
   // Modal
@@ -80,7 +75,7 @@ function App() {
       <div className="container">
         <div className="app__filters">
           <GenreSelect
-            onSelect={(genre) => setActiveGenre(genre)}
+            onSelect={setActiveGenre}
             genres={genres}
             activeGenre={activeGenre}
           />
@@ -102,8 +97,8 @@ function App() {
       <AnimatePresence initial={false} onExitComplete={() => null}>
         {modalOpen &&
           (
-            (modalOpen === 'MovieModal' && <MovieModal handleClose={close} formData={activeMovie} />) ||
-            (modalOpen === 'DeleteModal' && (<DeleteModal handleClose={close} />))
+            (modalOpen === MOVIE_MODAL && <MovieModal handleClose={close} formData={activeMovie} />) ||
+            (modalOpen === DELETE_MODAL && (<DeleteModal handleClose={close} />))
           )
         }
       </AnimatePresence>

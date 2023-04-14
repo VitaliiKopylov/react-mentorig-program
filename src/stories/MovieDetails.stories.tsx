@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import MovieDetails from '../components/MovieDetails/MovieDetails';
+import MovieDetails from '../components/MovieDetails';
 import styles from '../components/MovieDetails/styles.module.scss';
 
 const meta: Meta<typeof MovieDetails> = {

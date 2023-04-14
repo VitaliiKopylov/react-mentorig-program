@@ -1,19 +1,18 @@
 import type { InputHTMLAttributes } from 'react';
 // import styles from './styles.module.css';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+type InputProps = {
+  onChange: (val: string) => void;
   id: string;
   labelText?: string;
   placeholder?: string;
   value?: string;
-  // onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeHandler: (str: string) => void;
-};
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
 
 const BaseInput = ({
   labelText,
   id,
-  onChangeHandler,
+  onChange,
   placeholder,
   value,
   ...props
@@ -30,7 +29,7 @@ const BaseInput = ({
       placeholder={placeholder}
       className="input"
       value={value}
-      onChange={(e) => onChangeHandler(e.target.value)}
+      onChange={(e) => onChange(e.target.value)}
       {...props}
     />
   </div>

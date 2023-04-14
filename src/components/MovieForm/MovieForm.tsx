@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
-import BaseInput from '../BaseInput/BaseInput';
-import BaseSelect from '../BaseSelect/BaseSelect';
-import BaseTextarea from '../BaseTextarea/BaseTextarea';
-import BaseButton from '../BaseButton/BaseButton';
+import BaseInput from '../BaseInput';
+import BaseSelect from '../BaseSelect';
+import BaseTextarea from '../BaseTextarea';
+import BaseButton from '../BaseButton';
 import { IMovieDetails, Genres } from '../../types';
 import styles from './styles.module.scss';
 
@@ -49,26 +49,26 @@ const MovieForm = ({ initialFormData }: IMovieFormProps) => {
         id="name"
         labelText="Title"
         value={formData.name}
-        onChangeHandler={(val) => handleInput('name', val)}
+        onChange={(val) => handleInput('name', val)}
       />
       <BaseInput
         id="releaseYear"
         labelText="Release Date"
         value={formData.releaseYear as string}
-        onChangeHandler={(val) => handleInput('releaseYear', val)}
+        onChange={(val) => handleInput('releaseYear', val)}
         type="date"
       />
       <BaseInput
         id="imageUrl"
         labelText="Movie URL"
         value={formData.imageUrl}
-        onChangeHandler={(val) => handleInput('imageUrl', val)}
+        onChange={(val) => handleInput('imageUrl', val)}
       />
       <BaseInput
         id="rating"
         labelText="Rating"
         value={formData.rating as string}
-        onChangeHandler={(val) => handleInput('rating', val)}
+        onChange={(val) => handleInput('rating', val)}
       />
       <BaseSelect
         labelText="Genre"
@@ -81,14 +81,14 @@ const MovieForm = ({ initialFormData }: IMovieFormProps) => {
         id="duration"
         labelText="Runtime"
         value={formData.duration}
-        onChangeHandler={(val) => handleInput('duration', val)}
+        onChange={(val) => handleInput('duration', val)}
       />
       <div className={styles.form__textarea}>
         <BaseTextarea
           id="description"
           labelText="Description"
           value={formData.description}
-          onChangeHandler={(val) => handleInput('description', val)}
+          onChange={(val) => handleInput('description', val)}
           rows={5}
         />
       </div>

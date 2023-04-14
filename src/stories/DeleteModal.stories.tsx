@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import DeleteModal from '../components/modals/DeleteModal';
-import BaseButton from '../components/BaseButton/BaseButton';
+import BaseButton from '../components/BaseButton';
 // import { IMovieDetails } from '../types';
 
 const meta: Meta<typeof DeleteModal> = {

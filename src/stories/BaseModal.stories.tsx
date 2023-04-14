@@ -1,10 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import BaseModal from '../components/BaseModal/BaseModal';
-// import BaseButton from '../components/BaseButton/BaseButton';
-// import { IMovieDetails } from '../types';
-import styles from '../components/BaseModal/styles.module.css';
+import BaseModal from '../components/BaseModal';
 
 const meta: Meta<typeof BaseModal> = {
   title: 'Components/Modals/BaseModal',

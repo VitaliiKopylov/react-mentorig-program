@@ -1,18 +1,18 @@
 import type { TextareaHTMLAttributes } from 'react';
 
-interface IBaseTextareaProps
-  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+
+type IBaseTextareaProps = {
+  onChange: (val: string) => void;
   id: string;
   labelText?: string;
   placeholder?: string;
   value?: string;
-  onChangeHandler: (str: string) => void;
-}
+} & Omit <TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'>;
 
 const BaseTextarea = ({
   labelText,
   id,
-  onChangeHandler,
+  onChange,
   placeholder,
   value,
   ...props
@@ -28,7 +28,7 @@ const BaseTextarea = ({
       placeholder={placeholder}
       className="textarea"
       value={value}
-      onChange={(e) => onChangeHandler(e.target.value)}
+      onChange={(e) => onChange(e.target.value)}
       {...props}
     />
   </div>

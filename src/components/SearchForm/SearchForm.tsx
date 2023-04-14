@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import BaseButton from '../BaseButton/BaseButton';
-import BaseInput from '../BaseInput/BaseInput';
+import BaseButton from '../BaseButton';
+import BaseInput from '../BaseInput';
 import styles from './styles.module.scss';
 
 type SearchProps = {
@@ -23,7 +23,7 @@ const SearchForm = ({ initialValue = 'Search...', onSearch }: SearchProps) => {
           id="search"
           placeholder="What do you want to watch?"
           value={term}
-          onChangeHandler={setTerm}
+          onChange={setTerm}
           data-testid="search-input"
         />
       </div>

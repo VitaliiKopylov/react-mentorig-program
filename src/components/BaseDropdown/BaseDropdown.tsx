@@ -3,7 +3,12 @@ import { IconContext } from 'react-icons';
 
 import styles from './styles.module.scss';
 
-const BaseDropdown = ({ options, onSelected }: any) => (
+interface IBaseDropdown {
+  options: string[];
+  onSelected: (val: string) => void;
+}
+
+const BaseDropdown = ({ options, onSelected }: IBaseDropdown) => (
   <div className={styles.dd}>
     <IconContext.Provider
       value={{ color: 'var(--white)', className: styles.dd__closeWrapper }}
