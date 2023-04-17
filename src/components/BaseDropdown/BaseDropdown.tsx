@@ -17,7 +17,7 @@ const BaseDropdown = ({ options, onSelected }: IBaseDropdown) => (
         <TfiClose />
       </button>
     </IconContext.Provider>
-    {options.map((option: any) => (
+    {options.map((option: string) => (
       <button
         key={option}
         className={styles.dd__btn}

@@ -2,7 +2,7 @@ import { VscTriangleDown } from 'react-icons/vsc';
 import { IconContext } from 'react-icons';
 import clsx from 'clsx';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import styles from './styles.module.scss';
 
@@ -34,7 +34,7 @@ const BaseSelect = ({
 
   const handleSelect = (option: IOption) => {
     const index = selected.indexOf(option.value);
-    let newValue = [...selected];
+    const newValue = [...selected];
 
     if (index === -1) {
       newValue.push(option.value);
@@ -60,7 +60,7 @@ const BaseSelect = ({
             color: 'var(--accent_color)',
             className: clsx(
               styles.bSelect__arrow,
-              isOpen && styles.bSelect__arrowRotated,
+              isOpen && styles.bSelect__arrowRotated
             ),
           }}
         >

@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.0.0",
     "clsx": "^1.2.1",
     "cypress": "^12.8.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "focus-trap-react": "^10.1.1",
     "framer-motion": "^10.11.2",
     "react": "^18.2.0",
@@ -28,7 +29,9 @@
     "test": "jest --watchAll",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint": "eslint . --fix --max-warnings=0",
+    "format": "prettier . --write"
   },
   "eslintConfig": {
     "extends": [
@@ -68,10 +71,16 @@
     "@storybook/react-webpack5": "^7.0.2",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@testing-library/react": "^14.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
     "babel-jest": "^27.0.6",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "eslint": "^8.38.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-react": "^7.32.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
+    "prettier": "2.8.7",
     "prop-types": "^15.8.1",
     "sass": "^1.60.0",
     "storybook": "^7.0.2",

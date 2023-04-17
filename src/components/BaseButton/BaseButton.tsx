@@ -7,7 +7,7 @@ export interface ButtonProps
   children: ReactNode;
   classNames?: string;
   variant?: 'outlined';
-  onClick?: (params: any) => any;
+  onClick?: () => void;
 }
 
 const BaseButton = ({
@@ -17,7 +17,15 @@ const BaseButton = ({
   onClick,
   ...props
 }: ButtonProps) => (
-  <button onClick={onClick} className={clsx(styles.btn, classNames, variant && styles[`btn_${variant}`])} {...props}>
+  <button
+    onClick={onClick}
+    className={clsx(
+      styles.btn,
+      classNames,
+      variant && styles[`btn_${variant}`]
+    )}
+    {...props}
+  >
     {children}
   </button>
 );

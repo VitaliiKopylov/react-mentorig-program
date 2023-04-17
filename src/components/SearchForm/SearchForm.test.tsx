@@ -1,7 +1,7 @@
 import SearchForm from './SearchForm';
 import { render, fireEvent } from '@testing-library/react';
 
-const setup = (initialValue: string = 'test') => {
+const setup = (initialValue = 'test') => {
   const onSearchMock = jest.fn();
   const utils = render(
     <SearchForm initialValue={initialValue} onSearch={onSearchMock} />,
