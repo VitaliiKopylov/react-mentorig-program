@@ -23,9 +23,9 @@ type Story = StoryObj<typeof MovieTile>;
 export const Default: Story = {
   args: {
     movie: {
-      imageUrl: 'https://picsum.photos/322/455',
-      name: 'The Shining',
-      releaseYear: 1980,
+      poster_path: 'https://picsum.photos/322/455',
+      title: 'The Shining',
+      release_date: '1980',
       genres: ['Horror'],
     },
   },

@@ -1,18 +1,17 @@
 import SortControl from './SortControl';
 import { render, fireEvent, screen } from '@testing-library/react';
-import { SortOptions } from '../../types';
 
-const sortOptions = Object.values(SortOptions);
+import { sortingOptions } from '../../constants';
 
 const setup = () => {
-  const utils = render(
-    <SortControl />,
-  );
+  const onSelectedMock = jest.fn();
+  const utils = render(<SortControl onSelected={onSelectedMock} />);
   const { getByTestId } = utils;
   const trigger = getByTestId('sort-trigger');
 
   return {
     trigger,
+    onSelectedMock,
     ...utils,
   };
 };
@@ -23,7 +22,7 @@ describe('SortControl', () => {
     const dd = screen.queryByTestId('sort-dd');
 
     expect(trigger).toBeInTheDocument();
-    expect(trigger).toHaveTextContent(sortOptions[0]);
+    expect(trigger).toHaveTextContent(sortingOptions[0].name);
     expect(dd).not.toBeInTheDocument();
   });
 
@@ -34,5 +33,15 @@ describe('SortControl', () => {
 
     const dd = screen.queryByTestId('sort-dd');
     expect(dd).toBeInTheDocument();
+  });
+
+  it('should trigger onSelected callback function', () => {
+    const { trigger, getByTestId, onSelectedMock } = setup();
+
+    fireEvent.click(trigger);
+
+    const titleBtn = screen.getByTestId('title');
+    fireEvent.click(titleBtn);
+    expect(onSelectedMock).toBeCalled();
   });
 });

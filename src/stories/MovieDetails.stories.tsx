@@ -23,11 +23,11 @@ type Story = StoryObj<typeof MovieDetails>;
 export const Default: Story = {
   args: {
     movie: {
-      imageUrl: 'https://picsum.photos/322/455',
-      name: 'The Shining',
-      releaseYear: 1980,
+      poster_path: 'https://picsum.photos/322/455',
+      title: 'The Shining',
+      release_date: '1980',
       genres: ['Horror'],
-      rating: 8.4,
+      vote_average: '8.4',
       duration: '2h 26m',
       description:
         'A family heads to an isolated hotel for the winter where a sinister presence influences the father into violence, while his psychic son sees horrific forebodings from both past and future.',

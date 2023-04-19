@@ -20,10 +20,10 @@ interface IMovieFormProps {
 
 const MovieForm = ({ initialFormData }: IMovieFormProps) => {
   const [formData, setFormData] = useState<IMovieDetails>({
-    name: '',
-    releaseYear: '',
-    imageUrl: '',
-    rating: '',
+    title: '',
+    release_date: '',
+    poster_path: '',
+    vote_average: '',
     genres: [],
     duration: '',
     description: '',
@@ -31,43 +31,42 @@ const MovieForm = ({ initialFormData }: IMovieFormProps) => {
 
   useEffect(() => {
     if (initialFormData) {
-      console.log('FORM DATA::::', initialFormData)
       setFormData({ ...initialFormData });
     }
   }, []);
 
-  const handleInput = (name: string, value: string | string[]) => {
+  const handleInput = (title: string, value: string | string[]) => {
     setFormData({
       ...formData,
-      [name]: value,
+      [title]: value,
     });
   };
 
   return (
     <form className={styles.form}>
       <BaseInput
-        id="name"
+        id="title"
         labelText="Title"
-        value={formData.name}
-        onChange={(val) => handleInput('name', val)}
+        value={formData.title}
+        onChange={(val) => handleInput('title', val)}
       />
       <BaseInput
-        id="releaseYear"
+        id="release_date"
         labelText="Release Date"
-        value={formData.releaseYear as string}
-        onChange={(val) => handleInput('releaseYear', val)}
+        value={formData.release_date as string}
+        onChange={(val) => handleInput('release_date', val)}
         type="date"
       />
       <BaseInput
         id="imageUrl"
         labelText="Movie URL"
-        value={formData.imageUrl}
-        onChange={(val) => handleInput('imageUrl', val)}
+        value={formData.poster_path}
+        onChange={(val) => handleInput('poster_path', val)}
       />
       <BaseInput
         id="rating"
         labelText="Rating"
-        value={formData.rating as string}
+        value={formData.vote_average}
         onChange={(val) => handleInput('rating', val)}
       />
       <BaseSelect
@@ -93,7 +92,9 @@ const MovieForm = ({ initialFormData }: IMovieFormProps) => {
         />
       </div>
       <div className={styles.form__actions}>
-        <BaseButton type="reset" variant='outlined'>Reset</BaseButton>
+        <BaseButton type="reset" variant="outlined">
+          Reset
+        </BaseButton>
         <BaseButton>Submit</BaseButton>
       </div>
     </form>

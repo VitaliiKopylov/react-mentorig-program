@@ -3,28 +3,30 @@ import { IconContext } from 'react-icons';
 
 import { useState } from 'react';
 
-import { SortOptions } from '../../types';
 import BaseDropdown from '../BaseDropdown';
 
+import { IOption } from 'types';
+import { sortingOptions } from '../../constants';
 import styles from './styles.module.scss';
 
 interface ISortControlProps {
-  options?: SortOptions[];
-  onSelected?: () => void;
+  options?: IOption[];
+  onSelected: (option: IOption) => void;
 }
 
 const SortControl = ({
-  options = Object.values(SortOptions),
+  options = sortingOptions,
   onSelected,
 }: ISortControlProps) => {
   const [activeSortOption, setActiveSortOption] = useState(
-    SortOptions.ReleaseDate,
+    sortingOptions[0]
   );
   const [open, setOpen] = useState(false);
 
-  function optionSelected(option: any) {
+  function optionSelected(option: IOption) {
     if (option) {
       setActiveSortOption(option);
+      onSelected(option);
     }
     setOpen(false);
   }
@@ -38,7 +40,7 @@ const SortControl = ({
           onClick={() => setOpen(true)}
           data-testid="sort-trigger"
         >
-          {activeSortOption}
+          {activeSortOption.name}
           <IconContext.Provider
             value={{
               color: 'var(--accent_color)',

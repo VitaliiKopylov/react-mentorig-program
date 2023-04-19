@@ -2,7 +2,7 @@
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "The Silence of the Lambs",
-    "releaseYear": "1991-01-01",
+    "release_date": "1991-01-01",
     "rating": 8.6,
     "duration": "1h 58m",
     "description": "A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.",
@@ -11,7 +11,7 @@
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "The Shining",
-    "releaseYear": "1980-01-01",
+    "release_date": "1980-01-01",
     "rating": 8.4,
     "duration": "2h 26m",
     "description": "A family heads to an isolated hotel for the winter where a sinister presence influences the father into violence, while his psychic son sees horrific forebodings from both past and future.",
@@ -20,7 +20,7 @@
   {
     "imageUrl": "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/bE8q29QGKxMRKzPGeyCJvoXe20l.jpg",
     "name": "Psycho",
-    "releaseYear": "1960-01-01",
+    "release_date": "1960-01-01",
     "genres": ["Horror"],
     "rating": 8.5,
     "duration": "1h 49m",
@@ -29,7 +29,7 @@
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "The Blair Witch Project",
-    "releaseYear": "1999-01-01",
+    "release_date": "1999-01-01",
     "genres": ["Horror"],
     "rating": 8.5,
     "duration": "1h 49m",
@@ -38,7 +38,7 @@
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "This Is Spinal Tap",
-    "releaseYear": "1984-01-01",
+    "release_date": "1984-01-01",
     "genres": ["Comedy"],
     "rating": 8.5,
     "duration": "1h 49m",
@@ -47,7 +47,7 @@
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "Airplane!",
-    "releaseYear": "1980-01-01",
+    "release_date": "1980-01-01",
     "genres": ["Comedy"],
     "rating": 8.5,
     "duration": "1h 49m",
@@ -56,7 +56,7 @@
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "An Inconvenient Truth",
-    "releaseYear": "2006-01-01",
+    "release_date": "2006-01-01",
     "genres": ["Documentary"],
     "rating": 8.5,
     "duration": "1h 49m",
@@ -65,7 +65,7 @@
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "Bowling for Columbine",
-    "releaseYear": "2002-01-01",
+    "release_date": "2002-01-01",
     "genres": ["Documentary"],
     "rating": 8.5,
     "duration": "1h 49m",
@@ -74,7 +74,7 @@
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "Fahrenheit 9/11",
-    "releaseYear": "2004-01-01",
+    "release_date": "2004-01-01",
     "genres": ["Documentary"],
     "rating": 8.5,
     "duration": "1h 49m",
@@ -83,7 +83,7 @@
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "Get Out",
-    "releaseYear": "2017-01-01",
+    "release_date": "2017-01-01",
     "genres": ["Horror"],
     "rating": 8.5,
     "duration": "1h 49m",
@@ -92,7 +92,7 @@
   {
     "imageUrl": "https://picsum.photos/322/455",
     "name": "The Babadook",
-    "releaseYear": "2014-01-01",
+    "release_date": "2014-01-01",
     "genres": ["Horror"],
     "rating": 8.5,
     "duration": "1h 49m",
@@ -101,7 +101,7 @@
   {
     "imageUrl": "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kXTdxfgCRGg38Q90WG9iJyTYzqP.jpg",
     "name": "Shaun of the Dead",
-    "releaseYear": "2004-01-01",
+    "release_date": "2004-01-01",
     "genres": ["Comedy", "Horror"],
     "rating": 8.5,
     "duration": "1h 39m",

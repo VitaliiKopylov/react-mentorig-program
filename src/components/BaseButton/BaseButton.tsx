@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { ReactNode } from 'react';
 import styles from './styles.module.scss';
 
-export interface ButtonProps
+export interface IButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   classNames?: string;
@@ -16,7 +16,7 @@ const BaseButton = ({
   variant,
   onClick,
   ...props
-}: ButtonProps) => (
+}: IButtonProps) => (
   <button
     onClick={onClick}
     className={clsx(

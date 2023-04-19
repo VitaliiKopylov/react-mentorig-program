@@ -1,11 +1,12 @@
 import { TfiClose } from 'react-icons/tfi';
 import { IconContext } from 'react-icons';
 
+import { IOption } from 'types';
 import styles from './styles.module.scss';
 
 interface IBaseDropdown {
-  options: string[];
-  onSelected: (val: string) => void;
+  options: IOption[];
+  onSelected: (val: IOption) => void;
 }
 
 const BaseDropdown = ({ options, onSelected }: IBaseDropdown) => (
@@ -13,17 +14,21 @@ const BaseDropdown = ({ options, onSelected }: IBaseDropdown) => (
     <IconContext.Provider
       value={{ color: 'var(--white)', className: styles.dd__closeWrapper }}
     >
-      <button className={styles.dd__closeBtn} onClick={() => onSelected('')}>
+      <button
+        className={styles.dd__closeBtn}
+        onClick={() => onSelected({ name: '', value: '' })}
+      >
         <TfiClose />
       </button>
     </IconContext.Provider>
-    {options.map((option: string) => (
+    {options.map((option: IOption) => (
       <button
-        key={option}
+        key={option.value}
         className={styles.dd__btn}
         onClick={() => onSelected(option)}
+        data-testid={option.value}
       >
-        {option}
+        {option.name}
       </button>
     ))}
   </div>
