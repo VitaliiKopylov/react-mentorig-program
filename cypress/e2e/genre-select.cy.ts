@@ -2,8 +2,7 @@
 
 describe('GenreSelect spec', () => {
   it('passes', () => {
-    cy.visit('http://localhost:3000/');
-    cy.get('[data-cy="title"]').contains('GenreSelect component');
+    cy.visit('/');
     cy.get('[data-cy="Comedy-genre-select"]').click();
     cy.get('[data-cy="Comedy-genre-select-wrapper"]').should(($div) => {
       const className = $div[0].className;

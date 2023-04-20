@@ -8,8 +8,8 @@ const movieMock: IMovieDetails = {
   release_date: '2022',
   genres: ['Comedy', 'Drama'],
   vote_average: '7.5',
-  duration: '1h 30min',
-  description: 'This is a test movie.',
+  runtime: '90',
+  overview: 'This is a test movie.',
 };
 
 const setup = (movie = movieMock) => {
@@ -29,8 +29,8 @@ describe('MovieDetails', () => {
     expect(getByText(movieMock.title)).toBeInTheDocument();
     expect(getByText(movieMock.genres.join(', '))).toBeInTheDocument();
     expect(getByText(movieMock.release_date.toString())).toBeInTheDocument();
-    expect(getByText(movieMock.duration!)).toBeInTheDocument();
-    expect(getByText(movieMock.description!)).toBeInTheDocument();
+    expect(getByText('1h 30m')).toBeInTheDocument();
+    expect(getByText(movieMock.overview!)).toBeInTheDocument();
   });
 
   it('renders rating when it is present', () => {

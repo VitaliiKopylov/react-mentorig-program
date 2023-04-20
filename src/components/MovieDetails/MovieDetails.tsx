@@ -2,8 +2,9 @@ import clsx from 'clsx';
 import { VscSearch } from 'react-icons/vsc';
 import { IconContext } from 'react-icons';
 
-import { IMovieDetails } from '../../types';
 import BaseImage from '@components/BaseImage';
+import { IMovieDetails } from '../../types';
+import { convertMinutesToHoursAndMinutes } from '../../utils/duration';
 
 import styles from './styles.module.scss';
 
@@ -19,13 +20,15 @@ const MovieDetails = ({ movie, handleClose }: IMovieDetailsProps) => {
     release_date,
     genres,
     vote_average,
-    duration,
-    description,
+    runtime,
+    overview,
   } = movie;
   return (
     <article className={styles.movieDetails}>
       <div className={clsx(styles.movieDetails__inner, 'container')}>
-        <IconContext.Provider value={{ color: 'var(--accent_color)', size: '28px' }}>
+        <IconContext.Provider
+          value={{ color: 'var(--accent_color)', size: '28px' }}
+        >
           <button
             className={styles.movieDetails__closeBtn}
             onClick={handleClose}
@@ -50,9 +53,9 @@ const MovieDetails = ({ movie, handleClose }: IMovieDetailsProps) => {
           <div className={styles.movieDetails__genres}>{genres.join(', ')}</div>
           <div className={styles.movieDetails__stats}>
             <div>{release_date.slice(0, 4)}</div>
-            <div>{duration}</div>
+            {runtime && <div>{convertMinutesToHoursAndMinutes(runtime)}</div>}
           </div>
-          <div className={styles.movieDetails__description}>{description}</div>
+          <div className={styles.movieDetails__description}>{overview}</div>
         </div>
       </div>
     </article>

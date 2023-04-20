@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
-import BaseInput from '../BaseInput';
-import BaseSelect from '../BaseSelect';
-import BaseTextarea from '../BaseTextarea';
-import BaseButton from '../BaseButton';
+import BaseInput from '@components/BaseInput';
+import BaseSelect from '@components/BaseSelect';
+import BaseTextarea from '@components/BaseTextarea';
+import BaseButton from '@components/BaseButton';
 import { IMovieDetails, Genres } from '../../types';
 import styles from './styles.module.scss';
 
@@ -25,8 +25,8 @@ const MovieForm = ({ initialFormData }: IMovieFormProps) => {
     poster_path: '',
     vote_average: '',
     genres: [],
-    duration: '',
-    description: '',
+    runtime: '',
+    overview: '',
   });
 
   useEffect(() => {
@@ -77,17 +77,17 @@ const MovieForm = ({ initialFormData }: IMovieFormProps) => {
         onChange={(selected) => handleInput('genres', selected)}
       />
       <BaseInput
-        id="duration"
+        id="runtime"
         labelText="Runtime"
-        value={formData.duration}
-        onChange={(val) => handleInput('duration', val)}
+        value={formData.runtime}
+        onChange={(val) => handleInput('runtime', val)}
       />
       <div className={styles.form__textarea}>
         <BaseTextarea
-          id="description"
+          id="overview"
           labelText="Description"
-          value={formData.description}
-          onChange={(val) => handleInput('description', val)}
+          value={formData.overview}
+          onChange={(val) => handleInput('overview', val)}
           rows={5}
         />
       </div>

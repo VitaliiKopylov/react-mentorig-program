@@ -20,8 +20,8 @@ export interface IMovie {
 
 export interface IMovieDetails extends IMovie {
   vote_average?: string;
-  duration?: string;
-  description?: string;
+  runtime?: string;
+  overview?: string;
 }
 
 export interface IOption {

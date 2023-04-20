@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import MovieModal from '../components/modals/MovieModal';
-import BaseButton from '../components/BaseButton';
+import MovieModal from '@components/modals/MovieModal';
+import BaseButton from '@components/BaseButton';
 
 const meta: Meta<typeof MovieModal> = {
   title: 'Components/Modals/MovieModal',
@@ -51,8 +51,8 @@ export const Default: Story = {
       title: 'The Silence of the Lambs',
       release_date: '1991',
       vote_average: '8.6',
-      duration: '1h 58m',
-      description:
+      runtime: '1h 58m',
+      overview:
         'A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.',
       genres: ['Crime', 'Drama'],
     },

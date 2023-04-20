@@ -1,4 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
+
 import { useEffect, useState } from 'react';
 
 import SearchForm from '@components/SearchForm';
@@ -10,6 +11,7 @@ import { DeleteModal, MovieModal } from '@components/modals';
 
 import { Genres, IMovieDetails, IOption } from '../types';
 import { MOVIE_MODAL, DELETE_MODAL } from '../constants';
+import styles from './styles.module.scss';
 
 interface IMovieListPage {
   movieDetailsHandler: () => void;
@@ -26,22 +28,23 @@ const MovieListPage = ({ movieDetailsHandler }: IMovieListPage) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const queryUrl = `?limit=24&searchBy=title&sortOrder=asc&sortBy=${
-        query.sortBy
-      }${query.search ? '&search=' + query.search : ''}${
-        query.filter ? '&filter=' + query.filter : ''
-      }`;
-
-      const result = await fetch(`http://localhost:4000/movies${queryUrl}`);
-      const { data } = await result.json();
-      setMoviesList(data);
+      const searchQuery = query.search ? '&search=' + query.search : '';
+      const filterQuery = query.filter ? '&filter=' + query.filter : '';
+      const queryUrl = `?limit=24&searchBy=title&sortOrder=asc&sortBy=${query.sortBy}${searchQuery}${filterQuery}`;
+      try {
+        const result = await fetch(`http://localhost:4000/movies${queryUrl}`);
+        const { data } = await result.json();
+        setMoviesList(data);
+      } catch (err) {
+        setMoviesList([]);
+      }
     };
     setIsLoading(true);
     fetchData();
     setTimeout(() => setIsLoading(false), 200);
   }, [query]);
 
-  // Genres select
+  // Genres filtering
   const genres = Object.values(Genres);
   const [activeGenre, setActiveGenre] = useState(Genres.All);
 
@@ -50,7 +53,7 @@ const MovieListPage = ({ movieDetailsHandler }: IMovieListPage) => {
     setQuery({ ...query, filter: genre === 'All' ? '' : genre });
   };
 
-  // Sorting functionality
+  // Sorting
   const setActiveFilterQuery = (option: IOption) => {
     setQuery({ ...query, sortBy: option.value });
   };
@@ -85,52 +88,60 @@ const MovieListPage = ({ movieDetailsHandler }: IMovieListPage) => {
   };
 
   return (
-    <div>
+    <>
       {activeMovie ? (
         <MovieDetails
           movie={activeMovie as IMovieDetails}
           handleClose={closeMovieDetails}
         />
       ) : (
-        <div className="hero">
-          <div className="hero__inner">
+        <div className={styles.hero}>
+          <div className={styles.heroInner}>
             <h1 className="hero-title">Find your movie</h1>
             <SearchForm
-              initialValue=""
+              initialValue={query.search}
               onSearch={(term) => setQuery({ ...query, search: term })}
             />
           </div>
         </div>
       )}
-      <div className="container">
-        <div className="app__filters">
-          <GenreSelect
-            onSelect={setActiveGenreQuery}
-            genres={genres}
-            activeGenre={activeGenre}
-          />
-          <SortControl onSelected={setActiveFilterQuery} />
-        </div>
-        <div className="app__results">
-          {moviesList.length
-            ? `${moviesList.length} movies found`
-            : 'NO movies found'}
-        </div>
-
-        <div className="app__cards">
-          {isLoading
-            ? 'Is loading...'
-            : moviesList.map((movie) => (
-                <MovieTile
-                  key={movie.id}
-                  movie={movie}
-                  onMovieClick={() => goToActiveMovie(movie.title)}
-                  onMovieDelete={() => deleteMovie(movie.title)}
-                  onMovieEdit={() => editMovie(movie.title)}
-                />
-              ))}
+      <div className={styles.movies}>
+        <div className="container">
+          <div className={styles.moviesFilters}>
+            <GenreSelect
+              onSelect={setActiveGenreQuery}
+              genres={genres}
+              activeGenre={activeGenre}
+            />
+            <SortControl onSelected={setActiveFilterQuery} />
+          </div>
+          <div className={styles.moviesResults} data-cy="movies-amount">
+            {moviesList.length ? (
+              `${moviesList.length} movies found`
+            ) : (
+              <div className={styles.moviesEmpty}>
+                <div className="hero-title" data-cy="empty-title">
+                  No movies found
+                </div>
+              </div>
+            )}
+          </div>
+          <div className={styles.moviesCards}>
+            {isLoading
+              ? 'Is loading...'
+              : moviesList.map((movie) => (
+                  <MovieTile
+                    key={movie.id}
+                    movie={movie}
+                    onMovieClick={() => goToActiveMovie(movie.title)}
+                    onMovieDelete={() => deleteMovie(movie.title)}
+                    onMovieEdit={() => editMovie(movie.title)}
+                  />
+                ))}
+          </div>
         </div>
       </div>
+
       <AnimatePresence initial={false} onExitComplete={() => null}>
         {modalOpen &&
           ((modalOpen === MOVIE_MODAL && (
@@ -140,7 +151,7 @@ const MovieListPage = ({ movieDetailsHandler }: IMovieListPage) => {
               <DeleteModal handleClose={close} />
             )))}
       </AnimatePresence>
-    </div>
+    </>
   );
 };
 

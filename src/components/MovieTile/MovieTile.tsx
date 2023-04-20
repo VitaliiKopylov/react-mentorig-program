@@ -31,7 +31,11 @@ const MovieTile = ({
   };
 
   return (
-    <div className={styles.movieTile} onMouseLeave={() => setOpen(false)}>
+    <div
+      className={styles.movieTile}
+      onMouseLeave={() => setOpen(false)}
+      data-anim="movie-tile"
+    >
       <div className={styles.movieTile__top}>
         <BaseImage
           className={styles.movieTile__image}

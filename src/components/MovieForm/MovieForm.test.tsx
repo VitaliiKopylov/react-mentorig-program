@@ -1,19 +1,20 @@
 import { render } from '@testing-library/react';
 import MovieForm from './MovieForm';
+import { IMovieDetails } from '../../types';
 
 const formData = {
-poster_path:
+  poster_path:
     'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/kXTdxfgCRGg38Q90WG9iJyTYzqP.jpg',
   title: 'Shaun of the Dead',
-  release_date: "2004-01-01",
+  release_date: '2004-01-01',
   genres: ['Comedy', 'Horror'],
   vote_average: '8.5',
-  duration: '1h 39m',
-  description:
+  runtime: '1h 39m',
+  overview:
     "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run and checks into a remote motel run by a young man under the domination of his mother.",
 };
 
-const setup = (formData?: any) => {
+const setup = (formData?: IMovieDetails) => {
   const form = render(<MovieForm initialFormData={formData} />);
   const { getByLabelText } = form;
 
@@ -74,7 +75,7 @@ describe('MovieForm component', () => {
     expect(movieUrlInput.value).toBe(formData.poster_path);
     expect(ratingInput.value).toBe(formData.vote_average.toString());
     expect(genresSelect).toHaveTextContent(formData.genres.join(', '));
-    expect(durationInput.value).toBe(formData.duration);
-    expect(descriptionArea.value).toBe(formData.description);
+    expect(durationInput.value).toBe(formData.runtime);
+    expect(descriptionArea.value).toBe(formData.overview);
   });
 });
