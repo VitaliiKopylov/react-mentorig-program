@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import { ReactNode } from 'react';
 import styles from './styles.module.scss';
 
-export interface ButtonProps
+export interface IButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   classNames?: string;
   variant?: 'outlined';
-  onClick?: (params: any) => any;
+  onClick?: () => void;
 }
 
 const BaseButton = ({
@@ -16,8 +16,16 @@ const BaseButton = ({
   variant,
   onClick,
   ...props
-}: ButtonProps) => (
-  <button onClick={onClick} className={clsx(styles.btn, classNames, variant && styles[`btn_${variant}`])} {...props}>
+}: IButtonProps) => (
+  <button
+    onClick={onClick}
+    className={clsx(
+      styles.btn,
+      classNames,
+      variant && styles[`btn_${variant}`]
+    )}
+    {...props}
+  >
     {children}
   </button>
 );

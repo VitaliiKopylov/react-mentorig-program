@@ -8,22 +8,23 @@ export enum Genres {
   Crime = 'Crime',
 }
 
-export enum SortOptions {
-  ReleaseDate = 'Release Date',
-  Title = 'Title',
-}
-
 export interface IMovie {
-  imageUrl?: string;
-  name: string;
-  releaseYear: number | string;
+  poster_path?: string;
+  title: string;
+  release_date: string;
   // genres: Exclude<Genres, Genres.All>[];
   // genres: ('Documentary' | 'Comedy' | 'Horror' | 'Crime')[];
   genres: string[] | Exclude<Genres, Genres.All>[];
+  id?: string;
 }
 
 export interface IMovieDetails extends IMovie {
-  rating?: number | string;
-  duration?: string;
-  description?: string;
+  vote_average?: string;
+  runtime?: string;
+  overview?: string;
+}
+
+export interface IOption {
+  value: string;
+  name: string;
 }

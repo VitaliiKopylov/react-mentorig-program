@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Counter from '../components/Counter/Counter';
-import styles from '../components/Counter/styles.module.css';
+import Counter from '@components/Counter/Counter';
 
 const meta: Meta<typeof Counter> = {
   title: 'Components/Counter',

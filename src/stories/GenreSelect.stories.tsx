@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import GenreSelect from '../components/GenreSelect';
+import GenreSelect from '@components/GenreSelect';
 import { Genres } from '../types';
 
 const genres = Object.values(Genres);

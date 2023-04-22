@@ -1,15 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import MovieModal from '../components/modals/MovieModal';
-import BaseButton from '../components/BaseButton';
+import MovieModal from '@components/modals/MovieModal';
+import BaseButton from '@components/BaseButton';
 
 const meta: Meta<typeof MovieModal> = {
   title: 'Components/Modals/MovieModal',
   component: MovieModal,
   decorators: [
     (Story) => (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 'calc(100vh - 40px)' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: 'calc(100vh - 40px)',
+        }}
+      >
         <Story />
       </div>
     ),
@@ -40,12 +47,12 @@ const ModalExample = (formData: any) => {
 export const Default: Story = {
   args: {
     formData: {
-      imageUrl: 'https://picsum.photos/322/455',
-      name: 'The Silence of the Lambs',
-      releaseYear: 1991,
-      rating: 8.6,
-      duration: '1h 58m',
-      description:
+      poster_path: 'https://picsum.photos/322/455',
+      title: 'The Silence of the Lambs',
+      release_date: '1991',
+      vote_average: '8.6',
+      runtime: '1h 58m',
+      overview:
         'A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.',
       genres: ['Crime', 'Drama'],
     },

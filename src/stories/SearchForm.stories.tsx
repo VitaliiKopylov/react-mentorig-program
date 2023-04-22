@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import SearchForm from '../components/SearchForm/SearchForm';
-import styles from '../components/SearchForm/styles.module.css';
+import SearchForm from '@components/SearchForm';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta: Meta<typeof SearchForm> = {

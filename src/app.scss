@@ -1,5 +1,11 @@
 .app {
   padding-top: 90px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  
+  &__main {
+    flex-grow: 1;
+  }
   &__header {
     position: fixed;
     top: 20px;
@@ -31,6 +37,13 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 56px 52px;
     margin-bottom: 72px;
+  }
+  &__footer {
+    padding: 24px 0;
+    &-container {
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 

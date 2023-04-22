@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import SortControl from '../components/SortControl/SortControl';
-import styles from '../components/SortControl/styles.module.css';
+import SortControl from '@components/SortControl';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta: Meta<typeof SortControl> = {

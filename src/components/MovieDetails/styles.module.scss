@@ -1,8 +1,18 @@
 .movieDetails {
+  position: relative;
+  z-index: 500;
   &__inner {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 56px;
+    position: relative;
+  }
+  &__closeBtn {
+    position: absolute;
+    bottom: calc(100% + 40px);
+    right: 15px;
+    background: none;
+    border: none;
   }
   &__image {
     grid-column: 1 / span 1;
@@ -31,6 +41,7 @@
     text-align: center;
     text-transform: uppercase;
     color: var(--white);
+    flex-shrink: 0;
   }
   &__genres {
     font-family: 'Montserrat';

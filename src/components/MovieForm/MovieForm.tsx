@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
-import BaseInput from '../BaseInput';
-import BaseSelect from '../BaseSelect';
-import BaseTextarea from '../BaseTextarea';
-import BaseButton from '../BaseButton';
+import BaseInput from '@components/BaseInput';
+import BaseSelect from '@components/BaseSelect';
+import BaseTextarea from '@components/BaseTextarea';
+import BaseButton from '@components/BaseButton';
 import { IMovieDetails, Genres } from '../../types';
 import styles from './styles.module.scss';
 
@@ -20,54 +20,53 @@ interface IMovieFormProps {
 
 const MovieForm = ({ initialFormData }: IMovieFormProps) => {
   const [formData, setFormData] = useState<IMovieDetails>({
-    name: '',
-    releaseYear: '',
-    imageUrl: '',
-    rating: '',
+    title: '',
+    release_date: '',
+    poster_path: '',
+    vote_average: '',
     genres: [],
-    duration: '',
-    description: '',
+    runtime: '',
+    overview: '',
   });
 
   useEffect(() => {
     if (initialFormData) {
-      console.log('FORM DATA::::', initialFormData)
       setFormData({ ...initialFormData });
     }
   }, []);
 
-  const handleInput = (name: string, value: string | string[]) => {
+  const handleInput = (title: string, value: string | string[]) => {
     setFormData({
       ...formData,
-      [name]: value,
+      [title]: value,
     });
   };
 
   return (
     <form className={styles.form}>
       <BaseInput
-        id="name"
+        id="title"
         labelText="Title"
-        value={formData.name}
-        onChange={(val) => handleInput('name', val)}
+        value={formData.title}
+        onChange={(val) => handleInput('title', val)}
       />
       <BaseInput
-        id="releaseYear"
+        id="release_date"
         labelText="Release Date"
-        value={formData.releaseYear as string}
-        onChange={(val) => handleInput('releaseYear', val)}
+        value={formData.release_date as string}
+        onChange={(val) => handleInput('release_date', val)}
         type="date"
       />
       <BaseInput
         id="imageUrl"
         labelText="Movie URL"
-        value={formData.imageUrl}
-        onChange={(val) => handleInput('imageUrl', val)}
+        value={formData.poster_path}
+        onChange={(val) => handleInput('poster_path', val)}
       />
       <BaseInput
         id="rating"
         labelText="Rating"
-        value={formData.rating as string}
+        value={formData.vote_average}
         onChange={(val) => handleInput('rating', val)}
       />
       <BaseSelect
@@ -78,22 +77,24 @@ const MovieForm = ({ initialFormData }: IMovieFormProps) => {
         onChange={(selected) => handleInput('genres', selected)}
       />
       <BaseInput
-        id="duration"
+        id="runtime"
         labelText="Runtime"
-        value={formData.duration}
-        onChange={(val) => handleInput('duration', val)}
+        value={formData.runtime}
+        onChange={(val) => handleInput('runtime', val)}
       />
       <div className={styles.form__textarea}>
         <BaseTextarea
-          id="description"
+          id="overview"
           labelText="Description"
-          value={formData.description}
-          onChange={(val) => handleInput('description', val)}
+          value={formData.overview}
+          onChange={(val) => handleInput('overview', val)}
           rows={5}
         />
       </div>
       <div className={styles.form__actions}>
-        <BaseButton type="reset" variant='outlined'>Reset</BaseButton>
+        <BaseButton type="reset" variant="outlined">
+          Reset
+        </BaseButton>
         <BaseButton>Submit</BaseButton>
       </div>
     </form>
