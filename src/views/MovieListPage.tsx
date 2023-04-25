@@ -1,36 +1,35 @@
 import { AnimatePresence } from 'framer-motion';
 
 import { useEffect, useState } from 'react';
+import { useSearchParams, Outlet, useNavigate } from 'react-router-dom';
 
-import SearchForm from '@components/SearchForm';
 import GenreSelect from '@components/GenreSelect';
 import MovieTile from '@components/MovieTile';
-import MovieDetails from '@components/MovieDetails';
 import SortControl from '@components/SortControl';
 import { DeleteModal, MovieModal } from '@components/modals';
 
 import { Genres, IMovieDetails, IOption } from '../types';
-import { MOVIE_MODAL, DELETE_MODAL } from '../constants';
+import { MOVIE_MODAL, DELETE_MODAL, sortingOptions } from '../constants';
 import styles from './styles.module.scss';
 
-interface IMovieListPage {
-  movieDetailsHandler: () => void;
-}
-
-const MovieListPage = ({ movieDetailsHandler }: IMovieListPage) => {
+const MovieListPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [moviesList, setMoviesList] = useState<IMovieDetails[]>([]);
-  const [query, setQuery] = useState({
-    search: '',
-    filter: '',
-    sortBy: 'release_date',
-  });
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
-      const searchQuery = query.search ? '&search=' + query.search : '';
-      const filterQuery = query.filter ? '&filter=' + query.filter : '';
-      const queryUrl = `?limit=24&searchBy=title&sortOrder=asc&sortBy=${query.sortBy}${searchQuery}${filterQuery}`;
+      const searchQuery = searchParams.get('search')
+        ? '&search=' + searchParams.get('search')
+        : '';
+      const filterQuery = searchParams.get('filter')
+        ? '&filter=' + searchParams.get('filter')
+        : '';
+      const sortQuery = searchParams.get('sortBy')
+        ? '&sortBy=' + searchParams.get('sortBy')
+        : 'release_date';
+      const queryUrl = `?limit=24&searchBy=title&sortOrder=asc&${sortQuery}${searchQuery}${filterQuery}`;
       try {
         const result = await fetch(`http://localhost:4000/movies${queryUrl}`);
         const { data } = await result.json();
@@ -42,28 +41,43 @@ const MovieListPage = ({ movieDetailsHandler }: IMovieListPage) => {
     setIsLoading(true);
     fetchData();
     setTimeout(() => setIsLoading(false), 200);
-  }, [query]);
+  }, [searchParams]);
 
   // Genres filtering
   const genres = Object.values(Genres);
-  const [activeGenre, setActiveGenre] = useState(Genres.All);
+  const [activeGenre, setActiveGenre] = useState(
+    searchParams.get('filter') || Genres.All
+  );
 
-  const setActiveGenreQuery = (genre: Genres) => {
+  const setActiveGenreQuery = (genre: Genres | string) => {
     setActiveGenre(genre);
-    setQuery({ ...query, filter: genre === 'All' ? '' : genre });
+    searchParams.set('filter', genre === 'All' ? '' : genre);
+    setSearchParams(searchParams);
   };
 
   // Sorting
+  const [filterActiveOption, setFilterActiveOption] = useState<IOption>();
+  useEffect(() => {
+    const activeFilterOptionValue = searchParams.get('sortBy');
+    if (activeFilterOptionValue !== sortingOptions[0].value) {
+      const activeFilterOption = sortingOptions.find(
+        ({ value }) => activeFilterOptionValue === value
+      );
+      setFilterActiveOption(activeFilterOption as IOption);
+    }
+  }, []);
   const setActiveFilterQuery = (option: IOption) => {
-    setQuery({ ...query, sortBy: option.value });
+    searchParams.set('sortBy', option.value);
+    setSearchParams(searchParams);
   };
 
   // Movies Select
   const [activeMovie, setActiveMovie] = useState<IMovieDetails>();
-  const goToActiveMovie = (title: string) => {
-    const activeMovie = moviesList.find((movie) => movie.title === title);
-    setActiveMovie(activeMovie as IMovieDetails);
-    movieDetailsHandler();
+  const goToActiveMovie = (id: string) => {
+    navigate({
+      pathname: `/${id}`,
+      search: searchParams.toString(),
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   const editMovie = (title: string) => {
@@ -81,30 +95,9 @@ const MovieListPage = ({ movieDetailsHandler }: IMovieListPage) => {
   const open = (type: string) => setModalOpen(type);
   const close = () => setModalOpen(false);
 
-  // Close MovieDetails
-  const closeMovieDetails = () => {
-    setActiveMovie(undefined);
-    movieDetailsHandler();
-  };
-
   return (
     <>
-      {activeMovie ? (
-        <MovieDetails
-          movie={activeMovie as IMovieDetails}
-          handleClose={closeMovieDetails}
-        />
-      ) : (
-        <div className={styles.hero}>
-          <div className={styles.heroInner}>
-            <h1 className="hero-title">Find your movie</h1>
-            <SearchForm
-              initialValue={query.search}
-              onSearch={(term) => setQuery({ ...query, search: term })}
-            />
-          </div>
-        </div>
-      )}
+      <Outlet />
       <div className={styles.movies}>
         <div className="container">
           <div className={styles.moviesFilters}>
@@ -113,7 +106,10 @@ const MovieListPage = ({ movieDetailsHandler }: IMovieListPage) => {
               genres={genres}
               activeGenre={activeGenre}
             />
-            <SortControl onSelected={setActiveFilterQuery} />
+            <SortControl
+              onSelected={setActiveFilterQuery}
+              activeOption={filterActiveOption}
+            />
           </div>
           <div className={styles.moviesResults} data-cy="movies-amount">
             {moviesList.length ? (
@@ -133,7 +129,7 @@ const MovieListPage = ({ movieDetailsHandler }: IMovieListPage) => {
                   <MovieTile
                     key={movie.id}
                     movie={movie}
-                    onMovieClick={() => goToActiveMovie(movie.title)}
+                    onMovieClick={() => goToActiveMovie(movie.id as string)}
                     onMovieDelete={() => deleteMovie(movie.title)}
                     onMovieEdit={() => editMovie(movie.title)}
                   />

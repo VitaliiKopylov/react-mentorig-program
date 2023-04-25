@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import { VscSearch } from 'react-icons/vsc';
 import { IconContext } from 'react-icons';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import BaseImage from '@components/BaseImage';
 import { IMovieDetails } from '../../types';
@@ -8,33 +10,51 @@ import { convertMinutesToHoursAndMinutes } from '../../utils/duration';
 
 import styles from './styles.module.scss';
 
-interface IMovieDetailsProps {
-  movie: IMovieDetails;
-  handleClose: () => void;
-}
+const MovieDetails = () => {
+  const { movieId } = useParams();
+  const [movie, setMovie] = useState<IMovieDetails>();
+  const [movieError, setMovieError] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-const MovieDetails = ({ movie, handleClose }: IMovieDetailsProps) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await fetch(`http://localhost:4000/movies/${movieId}`);
+        const data= await result.json();
+        setMovie(data);
+      } catch (err) {
+        setMovieError(true);
+      }
+    };
+    fetchData();
+  }, [movieId]);
+
   const {
-    poster_path,
-    title,
-    release_date,
-    genres,
-    vote_average,
-    runtime,
-    overview,
-  } = movie;
+    poster_path = '',
+    title = '',
+    release_date = '',
+    genres = [],
+    vote_average = 0,
+    runtime = 0,
+    overview = '',
+  } = movie || {};
+
   return (
     <article className={styles.movieDetails}>
+      Movie details
       <div className={clsx(styles.movieDetails__inner, 'container')}>
         <IconContext.Provider
           value={{ color: 'var(--accent_color)', size: '28px' }}
         >
-          <button
+          <Link
             className={styles.movieDetails__closeBtn}
-            onClick={handleClose}
+            to={{
+              pathname: '/',
+              search: searchParams.toString(),
+            }}
           >
             <VscSearch />
-          </button>
+          </Link>
         </IconContext.Provider>
         <BaseImage
           className={styles.movieDetails__image}
