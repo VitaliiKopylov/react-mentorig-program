@@ -18,7 +18,6 @@ import styles from './styles.module.scss';
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState<IMovieDetails>();
-  const [movieError, setMovieError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 

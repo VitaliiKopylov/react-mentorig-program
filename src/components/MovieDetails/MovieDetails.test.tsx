@@ -14,14 +14,6 @@ const movieMock: IMovieDetails = {
   overview: 'This is a test movie.',
 };
 
-let windowFetchSpy;
-
-function wait(milliseconds: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, milliseconds);
-  });
-}
-
 let mockFetch = () =>
   Promise.resolve({
     ok: true,
@@ -30,7 +22,6 @@ let mockFetch = () =>
   } as Response);
 
 beforeAll(() => {
-  // windowFetchSpy = jest.spyOn(window, 'fetch').mockImplementation(mockFetch);
   global.fetch = jest.fn().mockImplementation(() => mockFetch());
 });
 
