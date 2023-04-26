@@ -1,7 +1,12 @@
 import clsx from 'clsx';
 import { VscSearch } from 'react-icons/vsc';
 import { IconContext } from 'react-icons';
-import { useParams, Link, useSearchParams } from 'react-router-dom';
+import {
+  useParams,
+  Link,
+  useSearchParams,
+  useNavigate,
+} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import BaseImage from '@components/BaseImage';
@@ -15,15 +20,16 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState<IMovieDetails>();
   const [movieError, setMovieError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await fetch(`http://localhost:4000/movies/${movieId}`);
-        const data= await result.json();
+        const data = await result.json();
         setMovie(data);
       } catch (err) {
-        setMovieError(true);
+        navigate('/not-found');
       }
     };
     fetchData();

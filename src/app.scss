@@ -8,10 +8,12 @@
   }
   &__header {
     position: fixed;
-    top: 20px;
+    top: 0px;
     left: 0;
+    padding: 20px 0;
     width: 100%;
     z-index: 100;
+    background: #232323;
     &-container {
       display: flex;
       justify-content: space-between;

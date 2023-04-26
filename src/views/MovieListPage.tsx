@@ -7,6 +7,7 @@ import GenreSelect from '@components/GenreSelect';
 import MovieTile from '@components/MovieTile';
 import SortControl from '@components/SortControl';
 import { DeleteModal, MovieModal } from '@components/modals';
+import { useModal } from 'hooks/useModal';
 
 import { Genres, IMovieDetails, IOption } from '../types';
 import { MOVIE_MODAL, DELETE_MODAL, sortingOptions } from '../constants';
@@ -17,6 +18,8 @@ const MovieListPage = () => {
   const [moviesList, setMoviesList] = useState<IMovieDetails[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { modalOpen, open, close } = useModal();
+  const [activeModal, setActiveModal] = useState<string>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,17 +86,17 @@ const MovieListPage = () => {
   const editMovie = (title: string) => {
     const activeMovie = moviesList.find((movie) => movie.title === title);
     setActiveMovie(activeMovie as IMovieDetails);
-    open('MovieModal');
+    setActiveModal(MOVIE_MODAL);
+    open();
   };
   const deleteMovie = (title: string) => {
     const activeMovie = moviesList.find((movie) => movie.title === title);
-    open(DELETE_MODAL);
+    setActiveModal(DELETE_MODAL);
+    open();
   };
 
   // Modal
-  const [modalOpen, setModalOpen] = useState<boolean | string>(false);
-  const open = (type: string) => setModalOpen(type);
-  const close = () => setModalOpen(false);
+  
 
   return (
     <>
@@ -140,10 +143,10 @@ const MovieListPage = () => {
 
       <AnimatePresence initial={false} onExitComplete={() => null}>
         {modalOpen &&
-          ((modalOpen === MOVIE_MODAL && (
+          ((activeModal === MOVIE_MODAL && (
             <MovieModal handleClose={close} formData={activeMovie} />
           )) ||
-            (modalOpen === DELETE_MODAL && (
+            (activeModal === DELETE_MODAL && (
               <DeleteModal handleClose={close} />
             )))}
       </AnimatePresence>

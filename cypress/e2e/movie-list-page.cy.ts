@@ -2,7 +2,9 @@
 
 describe('MovieListPage spec', () => {
   it('should display empty state when there are no movies', () => {
-    cy.intercept('GET', 'http://localhost:4000/movies*', { data: [] }).as('getMovies');
+    cy.intercept('GET', 'http://localhost:4000/movies*', { data: [] }).as(
+      'getMovies'
+    );
     cy.visit('/');
     cy.wait('@getMovies');
     cy.get('[data-cy="empty-title"]').contains('No movies found');
@@ -26,6 +28,7 @@ describe('MovieListPage spec', () => {
     cy.intercept('GET', 'http://localhost:4000/movies*', (req) => {
       expect(req.url).to.include('search=Metropolis');
     });
+    cy.location('search').should('to.include', '?search=Metropolis');
   });
 
   it('should change query params after genre selected', () => {
