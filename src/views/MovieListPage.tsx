@@ -23,6 +23,8 @@ const MovieListPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
+
       const searchQuery = searchParams.get('search')
         ? '&search=' + searchParams.get('search')
         : '';
@@ -37,13 +39,13 @@ const MovieListPage = () => {
         const result = await fetch(`http://localhost:4000/movies${queryUrl}`);
         const { data } = await result.json();
         setMoviesList(data);
+        setIsLoading(false);
       } catch (err) {
         setMoviesList([]);
+        setIsLoading(false);
       }
     };
-    setIsLoading(true);
     fetchData();
-    setTimeout(() => setIsLoading(false), 200);
   }, [searchParams]);
 
   // Genres filtering
