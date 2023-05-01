@@ -1,12 +1,17 @@
 import { useState } from 'react';
-import { Route, Routes, useParams, useLocation, Link } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useLocation,
+  Link,
+  useNavigate,
+} from 'react-router-dom';
 
 import MovieListPage from './views/MovieListPage';
 import PageNotFound from './views/PageNotFound';
 import MovieDetails from '@components/MovieDetails';
 import AppHero from '@components/AppHero/AppHero';
 import { MovieModal } from '@components/modals';
-import { useModal } from './hooks/useModal';
 
 import './assets/styles/vars.css';
 import './assets/styles/typography.css';
@@ -15,9 +20,11 @@ import logo from './assets/images/logo.svg';
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
 
-  // Modal
-  const { modalOpen, open, close } = useModal();
+  const goHomePage = () => {
+    navigate('/');
+  };
 
   return (
     <div className="app">
@@ -27,17 +34,22 @@ function App() {
             <img src={logo} alt="App" />
           </Link>
           {!location.pathname.match(/\/\d+/g)! && (
-            <button className="add-btn" onClick={open}>
+            <Link className="add-btn" to="/new">
               + add movie
-            </button>
+            </Link>
           )}
         </div>
       </header>
       <div className="app__main">
         <Routes>
-          <Route path="/" element={<MovieListPage />}>
+          <Route element={<MovieListPage />}>
             <Route path="/:movieId" element={<MovieDetails />} />
-            <Route index element={<AppHero />} />
+            <Route path="/" element={<AppHero />}>
+              <Route
+                path="/new"
+                element={<MovieModal handleClose={goHomePage} />}
+              />
+            </Route>
           </Route>
           <Route path="/not-found" element={<PageNotFound />} />
           <Route path="*" element={<PageNotFound />} />
@@ -50,7 +62,6 @@ function App() {
           </a>
         </div>
       </footer>
-      {modalOpen && <MovieModal handleClose={close} />}
     </div>
   );
 }
