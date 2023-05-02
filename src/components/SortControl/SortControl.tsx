@@ -1,7 +1,7 @@
 import { VscTriangleDown } from 'react-icons/vsc';
 import { IconContext } from 'react-icons';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import BaseDropdown from '../BaseDropdown';
 
@@ -11,17 +11,22 @@ import styles from './styles.module.scss';
 
 interface ISortControlProps {
   options?: IOption[];
+  activeOption?: IOption;
   onSelected: (option: IOption) => void;
 }
 
 const SortControl = ({
   options = sortingOptions,
+  activeOption,
   onSelected,
 }: ISortControlProps) => {
-  const [activeSortOption, setActiveSortOption] = useState(
-    sortingOptions[0]
-  );
+  const [activeSortOption, setActiveSortOption] = useState(sortingOptions[0]);
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (activeOption) {
+      setActiveSortOption(activeOption);
+    }
+  }, [activeOption]);
 
   function optionSelected(option: IOption) {
     if (option) {

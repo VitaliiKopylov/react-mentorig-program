@@ -3,13 +3,13 @@ import styles from './styles.module.scss';
 import { Genres } from '../../types';
 
 interface GenreSelectProps {
-  genres: Genres[];
-  activeGenre: Genres;
-  onSelect: (genre: Genres) => void;
+  genres: Genres[] | string[];
+  activeGenre: Genres | string;
+  onSelect: (genre: Genres | string) => void;
 }
 
 const GenreSelect = ({ genres, activeGenre, onSelect }: GenreSelectProps) => {
-  const onSelectHandler = (genre: Genres) => {
+  const onSelectHandler = (genre: Genres | string) => {
     onSelect(genre);
   };
 
