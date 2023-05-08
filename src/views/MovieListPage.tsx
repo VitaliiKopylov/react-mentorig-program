@@ -142,7 +142,7 @@ const MovieListPage = () => {
         </div>
       </div>
 
-      <AnimatePresence initial={false} onExitComplete={() => null}>
+      {/* <AnimatePresence initial={false} onExitComplete={() => null}>
         {modalOpen &&
           ((activeModal === MOVIE_MODAL && (
             <MovieModal handleClose={close} formData={activeMovie} />
@@ -150,7 +150,7 @@ const MovieListPage = () => {
             (activeModal === DELETE_MODAL && (
               <DeleteModal handleClose={close} />
             )))}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </>
   );
 };

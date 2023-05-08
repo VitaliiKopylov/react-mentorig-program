@@ -9,6 +9,8 @@ import {
 
 import MovieListPage from './views/MovieListPage';
 import PageNotFound from './views/PageNotFound';
+import AddMoviePage from './views/AddMoviePage';
+import EditMoviePage from './views/EditMoviePage';
 import MovieDetails from '@components/MovieDetails';
 import AppHero from '@components/AppHero/AppHero';
 import { MovieModal } from '@components/modals';
@@ -44,12 +46,12 @@ function App() {
         <Routes>
           <Route element={<MovieListPage />}>
             <Route path="/:movieId" element={<MovieDetails />}>
-              <Route path="edit" element={<MovieModal handleClose={goHomePage} />} />
+              <Route path="edit" element={<EditMoviePage />} />
             </Route>
             <Route path="/" element={<AppHero />}>
               <Route
                 path="/new"
-                element={<MovieModal handleClose={goHomePage} />}
+                element={<AddMoviePage />}
               />
             </Route>
           </Route>

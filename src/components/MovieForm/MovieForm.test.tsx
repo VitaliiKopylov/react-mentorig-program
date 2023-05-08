@@ -15,7 +15,7 @@ const formData = {
 };
 
 const setup = (formData?: IMovieDetails) => {
-  const form = render(<MovieForm initialFormData={formData} />);
+  const form = render(<MovieForm initialFormData={formData} formType='add' />);
   const { getByLabelText } = form;
 
   const titleInput = getByLabelText('Title') as HTMLInputElement;

@@ -19,9 +19,11 @@ const genresOptions = Object.values(Genres)
 
 interface IMovieFormProps {
   initialFormData?: IMovieDetails;
+  formType: 'add' | 'edit';
 }
 
-const MovieForm = ({ initialFormData }: IMovieFormProps) => {
+const MovieForm = ({ initialFormData, formType }: IMovieFormProps) => {
+
   const {
     handleSubmit,
     control,
@@ -32,11 +34,10 @@ const MovieForm = ({ initialFormData }: IMovieFormProps) => {
     defaultValues: initialFormData,
   });
 
-  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<IMovieDetails> = async (data) => {
-    const method = pathname === '/new' ? 'POST' : 'PUT';
+    const method = formType === 'add' ? 'POST' : 'PUT';
     const movie = {
       ...data,
       runtime: parseFloat(data.runtime as string),
@@ -51,12 +52,24 @@ const MovieForm = ({ initialFormData }: IMovieFormProps) => {
         },
       });
       const json = await response.json();
-      console.log('Успех:', JSON.stringify(json));
       navigate('/');
     } catch (error) {
       console.error('Ошибка:', error);
     }
   };
+
+  useEffect(() => {
+    reset({
+      title: initialFormData?.title,
+      release_date: initialFormData?.release_date,
+      poster_path: initialFormData?.poster_path,
+      vote_average: initialFormData?.vote_average,
+      genres: initialFormData?.genres,
+      runtime: initialFormData?.runtime,
+      overview: initialFormData?.overview,
+      id: initialFormData?.id
+    })
+  }, [initialFormData])
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -136,10 +149,6 @@ const MovieForm = ({ initialFormData }: IMovieFormProps) => {
             value: /^\d*\.?\d+$/,
             message: 'Invalid input. Please enter a valid number.',
           },
-          // pattern: {
-          //   value: /^([0-9](\.\d{1,2})?|10)$/,
-          //   message: 'Please enter a valid number between 0 and 10',
-          // },
         }}
         render={({ field }) => (
           <BaseInput
