@@ -85,11 +85,11 @@ const MovieListPage = () => {
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  const editMovie = (title: string) => {
-    const activeMovie = moviesList.find((movie) => movie.title === title);
-    setActiveMovie(activeMovie as IMovieDetails);
-    setActiveModal(MOVIE_MODAL);
-    open();
+  const editMovie = (id: string) => {
+    navigate({
+      pathname: `/${id}/edit`,
+      search: searchParams.toString(),
+    });
   };
   const deleteMovie = (title: string) => {
     const activeMovie = moviesList.find((movie) => movie.title === title);
@@ -98,7 +98,6 @@ const MovieListPage = () => {
   };
 
   // Modal
-  
 
   return (
     <>
@@ -135,8 +134,8 @@ const MovieListPage = () => {
                     key={movie.id}
                     movie={movie}
                     onMovieClick={() => goToActiveMovie(movie.id as string)}
+                    onMovieEdit={() => editMovie(movie.id as string)}
                     onMovieDelete={() => deleteMovie(movie.title)}
-                    onMovieEdit={() => editMovie(movie.title)}
                   />
                 ))}
           </div>

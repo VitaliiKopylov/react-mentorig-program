@@ -1,5 +1,7 @@
 import type { InputHTMLAttributes } from 'react';
-// import styles from './styles.module.css';
+import { FieldError } from 'react-hook-form';
+
+import ErrorField from '@components/ErrorField/ErrorField';
 
 type InputProps = {
   onChange: (val: string) => void;
@@ -7,6 +9,7 @@ type InputProps = {
   labelText?: string;
   placeholder?: string;
   value?: string;
+  error?: FieldError;
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
 
 const BaseInput = ({
@@ -15,6 +18,7 @@ const BaseInput = ({
   onChange,
   placeholder,
   value,
+  error,
   ...props
 }: InputProps) => (
   <div>
@@ -28,10 +32,11 @@ const BaseInput = ({
       id={id}
       placeholder={placeholder}
       className="input"
-      value={value}
+      defaultValue={value}
       onChange={(e) => onChange(e.target.value)}
       {...props}
     />
+    {error && <ErrorField error={error} />}
   </div>
 );
 

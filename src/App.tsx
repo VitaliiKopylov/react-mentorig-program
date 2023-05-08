@@ -43,7 +43,9 @@ function App() {
       <div className="app__main">
         <Routes>
           <Route element={<MovieListPage />}>
-            <Route path="/:movieId" element={<MovieDetails />} />
+            <Route path="/:movieId" element={<MovieDetails />}>
+              <Route path="edit" element={<MovieModal handleClose={goHomePage} />} />
+            </Route>
             <Route path="/" element={<AppHero />}>
               <Route
                 path="/new"

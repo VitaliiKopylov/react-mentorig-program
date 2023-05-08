@@ -8,10 +8,12 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import BaseImage from '@components/BaseImage';
 import { IMovieDetails } from '../../types';
 import { convertMinutesToHoursAndMinutes } from '../../utils/duration';
+import { API_URL } from '../../constants';
 
 import styles from './styles.module.scss';
 
@@ -24,7 +26,7 @@ const MovieDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await fetch(`http://localhost:4000/movies/${movieId}`);
+        const result = await fetch(`${API_URL}/movies/${movieId}`);
         const data = await result.json();
         setMovie(data);
       } catch (err) {
@@ -83,6 +85,7 @@ const MovieDetails = () => {
           <div className={styles.movieDetails__description}>{overview}</div>
         </div>
       </div>
+      <Outlet context={movie} />
     </article>
   );
 };
