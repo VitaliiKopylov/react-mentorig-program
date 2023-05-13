@@ -1,15 +1,7 @@
 import { FieldError } from 'react-hook-form';
 
 const ErrorField = ({ error }: { error: FieldError }) => {
-  let errorMessage;
-  switch (error.type) {
-    case 'required':
-      errorMessage = 'This is required field';
-      break;
-    default:
-      errorMessage = error.message;
-      break;
-  }
+  const errorMessage = error.type === 'required' ? 'This is required field' : error.message
   return <div className="error-message">{errorMessage}</div>;
 };
 
