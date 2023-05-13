@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import MovieModal from '@components/modals/MovieModal';
 import BaseButton from '@components/BaseButton';
+import { IMovieDetails } from '../types';
 
 const meta: Meta<typeof MovieModal> = {
   title: 'Components/Modals/MovieModal',
@@ -28,7 +29,7 @@ export default meta;
 
 type Story = StoryObj<typeof MovieModal>;
 
-const ModalExample = (formData: any) => {
+const ModalExample = ({ formData }: { formData: IMovieDetails }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -38,7 +39,7 @@ const ModalExample = (formData: any) => {
         <MovieModal
           handleClose={() => setModalOpen(false)}
           formData={formData}
-          formType='add'
+          formType="add"
         />
       )}
     </div>
@@ -58,5 +59,22 @@ export const Default: Story = {
       genres: ['Crime', 'Drama'],
     },
   },
-  render: ({ formData }) => <ModalExample formData={formData} />,
+  render: ({ formData }) => (
+    <ModalExample formData={formData as IMovieDetails} />
+  ),
 };
+
+// export const Default = () => {
+//   const formData: IMovieDetails = {
+//     poster_path: 'https://picsum.photos/322/455',
+//     title: 'The Silence of the Lambs',
+//     release_date: '1991',
+//     vote_average: '8.6',
+//     runtime: '1h 58m',
+//     overview:
+//       'A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.',
+//     genres: ['Crime', 'Drama'],
+//   };
+
+//   return <ModalExample formData={formData} />;
+// };

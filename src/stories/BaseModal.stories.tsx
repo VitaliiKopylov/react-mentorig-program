@@ -7,7 +7,14 @@ const meta: Meta<typeof BaseModal> = {
   component: BaseModal,
   decorators: [
     (Story) => (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 'calc(100vh - 40px)' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: 'calc(100vh - 40px)',
+        }}
+      >
         <Story />
       </div>
     ),
@@ -21,7 +28,12 @@ type Story = StoryObj<typeof BaseModal>;
 
 export const Default: Story = {
   args: {
-    title: <><h4>Base Modal</h4><p>Test</p></>,
-    children: 'Some content'
+    title: (
+      <>
+        <h4>Base Modal</h4>
+        <p>Test</p>
+      </>
+    ),
+    children: 'Some content',
   },
 };

@@ -17,7 +17,7 @@ const setup = ({
   const utils = render(
     <BaseModal handleClose={handleCloseMock} title={title}>
       {children}
-    </BaseModal>,
+    </BaseModal>
   );
   return {
     ...utils,

@@ -5,7 +5,6 @@ import { IMovieDetails } from '../types';
 const EditMoviePage = () => {
   const navigate = useNavigate();
   const movie = useOutletContext<IMovieDetails>();
-  console.log(movie);
   return (
     <MovieModal
       handleClose={() => navigate('/')}

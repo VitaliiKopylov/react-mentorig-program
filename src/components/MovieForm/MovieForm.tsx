@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import BaseInput from '@components/BaseInput';
 import BaseSelect from '@components/BaseSelect';
@@ -23,7 +23,6 @@ interface IMovieFormProps {
 }
 
 const MovieForm = ({ initialFormData, formType }: IMovieFormProps) => {
-
   const {
     handleSubmit,
     control,
@@ -44,14 +43,13 @@ const MovieForm = ({ initialFormData, formType }: IMovieFormProps) => {
       vote_average: parseFloat(data.vote_average as string),
     };
     try {
-      const response = await fetch(`${API_URL}/movies`, {
+      await fetch(`${API_URL}/movies`, {
         method,
-        body: JSON.stringify(movie), // данные могут быть 'строкой' или {объектом}!
+        body: JSON.stringify(movie),
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      const json = await response.json();
       navigate('/');
     } catch (error) {
       console.error('Ошибка:', error);
@@ -67,9 +65,9 @@ const MovieForm = ({ initialFormData, formType }: IMovieFormProps) => {
       genres: initialFormData?.genres,
       runtime: initialFormData?.runtime,
       overview: initialFormData?.overview,
-      id: initialFormData?.id
-    })
-  }, [initialFormData])
+      id: initialFormData?.id,
+    });
+  }, [initialFormData, reset]);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>

@@ -9,7 +9,14 @@ const meta: Meta<typeof DeleteModal> = {
   component: DeleteModal,
   decorators: [
     (Story) => (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 'calc(100vh - 40px)' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: 'calc(100vh - 40px)',
+        }}
+      >
         <Story />
       </div>
     ),

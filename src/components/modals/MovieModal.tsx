@@ -10,7 +10,7 @@ interface IMovieModal {
 
 const MovieModal = ({ formData, handleClose, formType }: IMovieModal) => (
   <BaseModal handleClose={handleClose} title={`${formType} Movie`}>
-    <MovieForm initialFormData={formData} formType={formType}/>
+    <MovieForm initialFormData={formData} formType={formType} />
   </BaseModal>
 );
 

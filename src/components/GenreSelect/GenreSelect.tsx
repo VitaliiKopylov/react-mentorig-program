@@ -20,13 +20,13 @@ const GenreSelect = ({ genres, activeGenre, onSelect }: GenreSelectProps) => {
           key={genre}
           className={clsx(
             styles.genresFiltersItem,
-            activeGenre === genre && styles.genresFiltersItemActive,
+            activeGenre === genre && styles.genresFiltersItemActive
           )}
           data-cy={`${genre}-genre-select-wrapper`}
         >
           <button
             className={styles.genresFiltersBtn}
-            onClick={(event) => onSelectHandler(genre)}
+            onClick={() => onSelectHandler(genre)}
             data-cy={`${genre}-genre-select`}
           >
             {genre}

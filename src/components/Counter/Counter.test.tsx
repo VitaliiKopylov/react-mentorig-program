@@ -9,14 +9,14 @@ describe('Counter', () => {
   });
 
   test('click event on "decrement" button decrements the displayed value', () => {
-    render(<Counter  initialValue={3} />);
+    render(<Counter initialValue={3} />);
     const button = screen.getByTestId('number-decrement');
     fireEvent.click(button);
     expect(screen.getByTestId('number-display')).toHaveTextContent('2');
   });
 
   test('click event on "increment" button increments the displayed value', () => {
-    render(<Counter  initialValue={3} />);
+    render(<Counter initialValue={3} />);
     const button = screen.getByTestId('number-increment');
     fireEvent.click(button);
     expect(screen.getByTestId('number-display')).toHaveTextContent('4');

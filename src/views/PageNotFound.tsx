@@ -1,5 +1,5 @@
-import BaseButton from "@components/BaseButton/BaseButton";
-import { useNavigate } from "react-router-dom";
+import BaseButton from '@components/BaseButton/BaseButton';
+import { useNavigate } from 'react-router-dom';
 
 const PageNotFound = () => {
   const navigate = useNavigate();

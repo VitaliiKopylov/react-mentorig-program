@@ -20,7 +20,7 @@ import styles from './styles.module.scss';
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState<IMovieDetails>();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const MovieDetails = () => {
       }
     };
     fetchData();
-  }, [movieId]);
+  }, [movieId, navigate]);
 
   const {
     poster_path = '',
