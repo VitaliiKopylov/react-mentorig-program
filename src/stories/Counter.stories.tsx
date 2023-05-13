@@ -12,6 +12,6 @@ type Story = StoryObj<typeof Counter>;
 
 export const Default: Story = {
   args: {
-    initialValue: 5
+    initialValue: 5,
   },
 };

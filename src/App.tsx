@@ -1,11 +1,4 @@
-import { useState } from 'react';
-import {
-  Route,
-  Routes,
-  useLocation,
-  Link,
-  useNavigate,
-} from 'react-router-dom';
+import { Route, Routes, useLocation, Link } from 'react-router-dom';
 
 import MovieListPage from './views/MovieListPage';
 import PageNotFound from './views/PageNotFound';
@@ -13,7 +6,6 @@ import AddMoviePage from './views/AddMoviePage';
 import EditMoviePage from './views/EditMoviePage';
 import MovieDetails from '@components/MovieDetails';
 import AppHero from '@components/AppHero/AppHero';
-import { MovieModal } from '@components/modals';
 
 import './assets/styles/vars.css';
 import './assets/styles/typography.css';
@@ -22,11 +14,6 @@ import logo from './assets/images/logo.svg';
 
 function App() {
   const location = useLocation();
-  const navigate = useNavigate();
-
-  const goHomePage = () => {
-    navigate('/');
-  };
 
   return (
     <div className="app">
@@ -35,7 +22,7 @@ function App() {
           <Link to="/">
             <img src={logo} alt="App" />
           </Link>
-          {!location.pathname.match(/\/\d+/g)! && (
+          {!location.pathname.match(/\/\d+/g) && (
             <Link className="add-btn" to="/new">
               + add movie
             </Link>
@@ -49,10 +36,7 @@ function App() {
               <Route path="edit" element={<EditMoviePage />} />
             </Route>
             <Route path="/" element={<AppHero />}>
-              <Route
-                path="/new"
-                element={<AddMoviePage />}
-              />
+              <Route path="/new" element={<AddMoviePage />} />
             </Route>
           </Route>
           <Route path="/not-found" element={<PageNotFound />} />

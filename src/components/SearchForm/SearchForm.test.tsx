@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/react';
 const setup = (initialValue = 'test') => {
   const onSearchMock = jest.fn();
   const utils = render(
-    <SearchForm initialValue={initialValue} onSearch={onSearchMock} />,
+    <SearchForm initialValue={initialValue} onSearch={onSearchMock} />
   );
   const { getByTestId } = utils;
   const input = getByTestId('search-input') as HTMLInputElement;

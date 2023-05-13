@@ -6,7 +6,11 @@ const setup = (activeGenre?: Genres) => {
   const genres = Object.values(Genres);
   const onSelectMock = jest.fn();
   const utils = render(
-    <GenreSelect genres={genres} onSelect={onSelectMock} activeGenre={activeGenre || Genres.All} />,
+    <GenreSelect
+      genres={genres}
+      onSelect={onSelectMock}
+      activeGenre={activeGenre || Genres.All}
+    />
   );
   return {
     onSelectMock,

@@ -1,1 +1,1 @@
-export { default } from './BaseTextarea'
+export { default } from './BaseTextarea';

@@ -6,11 +6,11 @@ import { useSearchParams, Outlet, useNavigate } from 'react-router-dom';
 import GenreSelect from '@components/GenreSelect';
 import MovieTile from '@components/MovieTile';
 import SortControl from '@components/SortControl';
-import { DeleteModal, MovieModal } from '@components/modals';
 import { useModal } from 'hooks/useModal';
+import { DeleteModal } from '@components/modals';
 
 import { Genres, IMovieDetails, IOption } from '../types';
-import { MOVIE_MODAL, DELETE_MODAL, sortingOptions } from '../constants';
+import { sortingOptions } from '../constants';
 import styles from './styles.module.scss';
 
 const MovieListPage = () => {
@@ -19,7 +19,6 @@ const MovieListPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { modalOpen, open, close } = useModal();
-  const [activeModal, setActiveModal] = useState<string>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,14 +69,13 @@ const MovieListPage = () => {
       );
       setFilterActiveOption(activeFilterOption as IOption);
     }
-  }, []);
+  }, [searchParams]);
   const setActiveFilterQuery = (option: IOption) => {
     searchParams.set('sortBy', option.value);
     setSearchParams(searchParams);
   };
 
   // Movies Select
-  const [activeMovie, setActiveMovie] = useState<IMovieDetails>();
   const goToActiveMovie = (id: string) => {
     navigate({
       pathname: `/${id}`,
@@ -93,7 +91,7 @@ const MovieListPage = () => {
   };
   const deleteMovie = (title: string) => {
     const activeMovie = moviesList.find((movie) => movie.title === title);
-    setActiveModal(DELETE_MODAL);
+    console.log(activeMovie);
     open();
   };
 
@@ -142,15 +140,9 @@ const MovieListPage = () => {
         </div>
       </div>
 
-      {/* <AnimatePresence initial={false} onExitComplete={() => null}>
-        {modalOpen &&
-          ((activeModal === MOVIE_MODAL && (
-            <MovieModal handleClose={close} formData={activeMovie} />
-          )) ||
-            (activeModal === DELETE_MODAL && (
-              <DeleteModal handleClose={close} />
-            )))}
-      </AnimatePresence> */}
+      <AnimatePresence initial={false} onExitComplete={() => null}>
+        {modalOpen && <DeleteModal handleClose={close} />}
+      </AnimatePresence>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import DeleteModal from "./DeleteModal";
-import MovieModal from "./MovieModal";
+import DeleteModal from './DeleteModal';
+import MovieModal from './MovieModal';
 
-export { DeleteModal, MovieModal }
+export { DeleteModal, MovieModal };
