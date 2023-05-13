@@ -1,6 +1,8 @@
 import { VscTriangleDown } from 'react-icons/vsc';
 import { IconContext } from 'react-icons';
 import clsx from 'clsx';
+import { FieldError } from 'react-hook-form';
+import ErrorField from '@components/ErrorField/ErrorField';
 
 import { useState } from 'react';
 
@@ -17,6 +19,7 @@ interface IBaseSelectProps {
   options: IOption[];
   onChange: (selected: string[]) => void;
   selected: string[];
+  error?: FieldError;
 }
 
 const BaseSelect = ({
@@ -25,6 +28,7 @@ const BaseSelect = ({
   id,
   onChange,
   selected = [],
+  error,
 }: IBaseSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -67,6 +71,7 @@ const BaseSelect = ({
           <VscTriangleDown />
         </IconContext.Provider>
       </div>
+      {error && <ErrorField error={error} />}
       {isOpen && (
         <div className={styles.bSelect__options}>
           {options.map((option) => (

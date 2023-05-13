@@ -41,14 +41,18 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
-  /* identical to box height */
-
   letter-spacing: 0.888889px;
   text-transform: uppercase;
-
   color: #f65261;
-
-  mix-blend-mode: normal;
   opacity: 0.8;
   margin-bottom: 12px;
+}
+
+.error-message {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: #f65261;
 }

@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import BaseInput from '@components/BaseInput';
 import BaseSelect from '@components/BaseSelect';
 import BaseTextarea from '@components/BaseTextarea';
 import BaseButton from '@components/BaseButton';
 import { IMovieDetails, Genres } from '../../types';
+import { API_URL } from '../../constants';
 import styles from './styles.module.scss';
 
 const genresOptions = Object.values(Genres)
@@ -16,86 +19,219 @@ const genresOptions = Object.values(Genres)
 
 interface IMovieFormProps {
   initialFormData?: IMovieDetails;
+  formType: 'add' | 'edit';
 }
 
-const MovieForm = ({ initialFormData }: IMovieFormProps) => {
-  const [formData, setFormData] = useState<IMovieDetails>({
-    title: '',
-    release_date: '',
-    poster_path: '',
-    vote_average: '',
-    genres: [],
-    runtime: '',
-    overview: '',
+const MovieForm = ({ initialFormData, formType }: IMovieFormProps) => {
+
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+    setValue,
+  } = useForm<IMovieDetails>({
+    defaultValues: initialFormData,
   });
 
-  useEffect(() => {
-    if (initialFormData) {
-      setFormData({ ...initialFormData });
-    }
-  }, []);
+  const navigate = useNavigate();
 
-  const handleInput = (title: string, value: string | string[]) => {
-    setFormData({
-      ...formData,
-      [title]: value,
-    });
+  const onSubmit: SubmitHandler<IMovieDetails> = async (data) => {
+    const method = formType === 'add' ? 'POST' : 'PUT';
+    const movie = {
+      ...data,
+      runtime: parseFloat(data.runtime as string),
+      vote_average: parseFloat(data.vote_average as string),
+    };
+    try {
+      const response = await fetch(`${API_URL}/movies`, {
+        method,
+        body: JSON.stringify(movie), // данные могут быть 'строкой' или {объектом}!
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const json = await response.json();
+      navigate('/');
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
   };
 
+  useEffect(() => {
+    reset({
+      title: initialFormData?.title,
+      release_date: initialFormData?.release_date,
+      poster_path: initialFormData?.poster_path,
+      vote_average: initialFormData?.vote_average,
+      genres: initialFormData?.genres,
+      runtime: initialFormData?.runtime,
+      overview: initialFormData?.overview,
+      id: initialFormData?.id
+    })
+  }, [initialFormData])
+
   return (
-    <form className={styles.form}>
-      <BaseInput
-        id="title"
-        labelText="Title"
-        value={formData.title}
-        onChange={(val) => handleInput('title', val)}
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        name="title"
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <BaseInput
+            id="title"
+            labelText="Title"
+            value={field.value}
+            onChange={(val) => setValue('title', val)}
+            error={errors.title}
+          />
+        )}
       />
-      <BaseInput
-        id="release_date"
-        labelText="Release Date"
-        value={formData.release_date as string}
-        onChange={(val) => handleInput('release_date', val)}
-        type="date"
+      <Controller
+        name="release_date"
+        control={control}
+        rules={{
+          required: true,
+          min: {
+            value: '1900-01-01',
+            message: 'The date must be after 1900-01-01',
+          },
+          max: {
+            value: '2027-01-01',
+            message: 'The date must be before 2027-01-01',
+          },
+        }}
+        render={({ field }) => (
+          <BaseInput
+            id="release_date"
+            labelText="Release Date"
+            value={field.value}
+            onChange={(val) => setValue('release_date', val)}
+            error={errors.release_date}
+            type="date"
+          />
+        )}
       />
-      <BaseInput
-        id="imageUrl"
-        labelText="Movie URL"
-        value={formData.poster_path}
-        onChange={(val) => handleInput('poster_path', val)}
+      <Controller
+        name="poster_path"
+        control={control}
+        rules={{
+          required: true,
+          pattern: {
+            value: /^(ftp|http|https):\/\/[^ "]+$/,
+            message: 'Please enter a valid URL',
+          },
+        }}
+        render={({ field }) => (
+          <BaseInput
+            id="poster_path"
+            labelText="Movie URL"
+            value={field.value}
+            onChange={(val) => setValue('poster_path', val)}
+            error={errors.poster_path}
+          />
+        )}
       />
-      <BaseInput
-        id="rating"
-        labelText="Rating"
-        value={formData.vote_average}
-        onChange={(val) => handleInput('rating', val)}
+      <Controller
+        name="vote_average"
+        control={control}
+        rules={{
+          required: true,
+          min: {
+            value: 1,
+            message: 'This field must be at least 1',
+          },
+          max: {
+            value: 10,
+            message: 'This field cannot be greater than 10',
+          },
+          pattern: {
+            value: /^\d*\.?\d+$/,
+            message: 'Invalid input. Please enter a valid number.',
+          },
+        }}
+        render={({ field }) => (
+          <BaseInput
+            id="vote_average"
+            labelText="Rating"
+            value={field.value}
+            onChange={(val) => setValue('vote_average', val)}
+            error={errors.vote_average}
+          />
+        )}
       />
-      <BaseSelect
-        labelText="Genre"
-        id="genre"
-        selected={formData.genres}
-        options={genresOptions}
-        onChange={(selected) => handleInput('genres', selected)}
+      <Controller
+        name="genres"
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <BaseSelect
+            labelText="Genre"
+            id="genre"
+            selected={field.value}
+            options={genresOptions}
+            onChange={(selected) => setValue('genres', selected)}
+            // @ts-expect-error unhandled error
+            error={errors.genres}
+          />
+        )}
       />
-      <BaseInput
-        id="runtime"
-        labelText="Runtime"
-        value={formData.runtime}
-        onChange={(val) => handleInput('runtime', val)}
+      <Controller
+        name="runtime"
+        control={control}
+        rules={{
+          required: true,
+          min: {
+            value: 1,
+            message: 'This field must be at least 1',
+          },
+          max: {
+            value: 3000,
+            message: 'This field cannot be greater than 3000',
+          },
+          pattern: {
+            value: /^[0-9]+$/,
+            message: 'Invalid input. Please enter a valid number.',
+          },
+        }}
+        render={({ field }) => (
+          <BaseInput
+            id="runtime"
+            labelText="Runtime"
+            value={field.value}
+            onChange={(val) => setValue('runtime', val)}
+            error={errors.runtime}
+          />
+        )}
       />
       <div className={styles.form__textarea}>
-        <BaseTextarea
-          id="overview"
-          labelText="Description"
-          value={formData.overview}
-          onChange={(val) => handleInput('overview', val)}
-          rows={5}
+        <Controller
+          name="overview"
+          control={control}
+          rules={{
+            required: true,
+            minLength: {
+              value: 50,
+              message: 'Description must be at least 50 characters long.',
+            },
+          }}
+          render={({ field }) => (
+            <BaseTextarea
+              id="overview"
+              labelText="Description"
+              value={field.value}
+              onChange={(val) => setValue('overview', val)}
+              error={errors.overview}
+              rows={5}
+            />
+          )}
         />
       </div>
       <div className={styles.form__actions}>
-        <BaseButton type="reset" variant="outlined">
+        <BaseButton type="reset" variant="outlined" onClick={() => reset()}>
           Reset
         </BaseButton>
-        <BaseButton>Submit</BaseButton>
+        <BaseButton type="submit">Submit</BaseButton>
       </div>
     </form>
   );

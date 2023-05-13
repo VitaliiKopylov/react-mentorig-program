@@ -5,11 +5,12 @@ import { IMovieDetails } from '../../types';
 interface IMovieModal {
   formData?: IMovieDetails;
   handleClose: () => void;
+  formType: 'add' | 'edit';
 }
 
-const MovieModal = ({ formData, handleClose }: IMovieModal) => (
-  <BaseModal handleClose={handleClose} title={'Add Movie'}>
-    <MovieForm initialFormData={formData} />
+const MovieModal = ({ formData, handleClose, formType }: IMovieModal) => (
+  <BaseModal handleClose={handleClose} title={`${formType} Movie`}>
+    <MovieForm initialFormData={formData} formType={formType}/>
   </BaseModal>
 );
 

@@ -38,6 +38,7 @@ const ModalExample = (formData: any) => {
         <MovieModal
           handleClose={() => setModalOpen(false)}
           formData={formData}
+          formType='add'
         />
       )}
     </div>

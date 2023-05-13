@@ -1,5 +1,6 @@
 import type { TextareaHTMLAttributes } from 'react';
-
+import { FieldError } from 'react-hook-form';
+import ErrorField from '@components/ErrorField/ErrorField';
 
 type IBaseTextareaProps = {
   onChange: (val: string) => void;
@@ -7,7 +8,8 @@ type IBaseTextareaProps = {
   labelText?: string;
   placeholder?: string;
   value?: string;
-} & Omit <TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'>;
+  error?: FieldError;
+} & Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange'>;
 
 const BaseTextarea = ({
   labelText,
@@ -15,6 +17,7 @@ const BaseTextarea = ({
   onChange,
   placeholder,
   value,
+  error,
   ...props
 }: IBaseTextareaProps) => (
   <div>
@@ -27,10 +30,11 @@ const BaseTextarea = ({
       id={id}
       placeholder={placeholder}
       className="textarea"
-      value={value}
+      defaultValue={value}
       onChange={(e) => onChange(e.target.value)}
       {...props}
     />
+    {error && <ErrorField error={error} />}
   </div>
 );
 
