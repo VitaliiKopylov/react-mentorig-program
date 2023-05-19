@@ -6,7 +6,7 @@ import { useSearchParams, Outlet, useNavigate } from 'react-router-dom';
 import GenreSelect from '@components/GenreSelect';
 import MovieTile from '@components/MovieTile';
 import SortControl from '@components/SortControl';
-import { useModal } from 'hooks/useModal';
+import { useModal } from '../hooks/useModal';
 import { DeleteModal } from '@components/modals';
 
 import { Genres, IMovieDetails, IOption } from '../types';
