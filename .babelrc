@@ -3,6 +3,5 @@
     "@babel/preset-env",
     ["@babel/preset-react", { "runtime": "automatic" }],
     "@babel/typescript"
-    // ["@babel/env", { "modules": false }]
   ]
 }

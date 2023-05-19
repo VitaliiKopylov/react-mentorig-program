@@ -2,7 +2,7 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-// import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import { Configuration, DefinePlugin } from 'webpack';
 import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
@@ -38,70 +38,40 @@ module.exports = (argv: any) => {
           exclude: /node_modules/,
           loader: 'babel-loader',
         },
-        // {
-        //   test: /\.css$/,
-        //   use: [MiniCssExtractPlugin.loader, 'css-loader'],
-        // },
-        // {
-        //   test: /\.s[ac]ss$/i,
-        //   use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'sass-loader'],
-        // },
-        // {
-        //   test: /\.module\.s(a|c)ss$/,
-        //   loader: [
-        //     isProduction ?  MiniCssExtractPlugin.loader : 'style-loader',
-        //     {
-        //       loader: 'css-loader',
-        //       options: {
-        //         modules: true,
-        //         sourceMap: !isProduction,
-        //       },
-        //     },
-        //     {
-        //       loader: 'sass-loader',
-        //       options: {
-        //         sourceMap: !isProduction,
-        //       },
-        //     },
-        //   ],
-        // },
-        // {
-        //   test: /\.s(a|c)ss$/,
-        //   exclude: /\.module.(s(a|c)ss)$/,
-        //   loader: [
-        //     isProduction ?  MiniCssExtractPlugin.loader : 'style-loader',
-        //     'css-loader',
-        //     {
-        //       loader: 'sass-loader',
-        //       options: {
-        //         sourceMap: !isProduction,
-        //       },
-        //     },
-        //   ],
-        // },
         {
           test: /\.css$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            'css-loader',
-            'postcss-loader',
-            'sass-loader',
-          ],
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
         {
-          test: /\.(sa|sc)ss$/,
+          test: /\.module\.s(a|c)ss$/,
           use: [
-            { loader: 'style-loader' },
+            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
             {
               loader: 'css-loader',
               options: {
                 modules: true,
-                sourceMap: false,
-                // localIdentName: '[name]_[local]_[hash:base64:5]',
+                sourceMap: !isProduction,
               },
             },
             {
               loader: 'sass-loader',
+              options: {
+                sourceMap: !isProduction,
+              },
+            },
+          ],
+        },
+        {
+          test: /\.s(a|c)ss$/,
+          exclude: /\.module.(s(a|c)ss)$/,
+          use: [
+            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: !isProduction,
+              },
             },
           ],
         },
@@ -113,11 +83,7 @@ module.exports = (argv: any) => {
     },
     optimization: {
       minimize: isProduction,
-      // minimizer: [new TerserPlugin(), new OptimizeCssAssetsPlugin()],
-      minimizer: [new TerserPlugin()],
-      // splitChunks: {
-      //   chunks: 'all',
-      // },
+      minimizer: [new TerserPlugin(), new OptimizeCssAssetsPlugin()],
     },
     devtool: isProduction ? false : 'inline-source-map',
     plugins: [
